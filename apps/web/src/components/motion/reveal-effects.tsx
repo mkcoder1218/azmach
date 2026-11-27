@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useLayoutEffect } from 'react';
 import { usePathname } from 'next/navigation';
 
 const selector = 'main h1, main h2, main h3, main p, main article, main [data-reveal]';
@@ -8,7 +8,7 @@ const selector = 'main h1, main h2, main h3, main p, main article, main [data-re
 export default function RevealEffects() {
   const pathname = usePathname();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!('IntersectionObserver' in window)) return;
     const media = window.matchMedia('(prefers-reduced-motion: reduce)');
     const tracked = new Set<HTMLElement>();
@@ -38,14 +38,31 @@ export default function RevealEffects() {
         for (const node of tracked) {
           if (!node.isConnected) { observer?.unobserve(node); tracked.delete(node); }
         }
+        const added: { node: HTMLElement; transition: string; priority: string }[] = [];
         for (const node of document.querySelectorAll<HTMLElement>(selector)) {
           if (tracked.has(node) || node.closest('[data-no-reveal]')) continue;
           // Reveal a card or explicit group as a unit; never animate its text twice.
           const ancestor = node.parentElement?.closest(selector);
           if (ancestor && (ancestor.matches('article, [data-reveal]'))) continue;
+          added.push({
+            node,
+            transition: node.style.getPropertyValue('transition'),
+            priority: node.style.getPropertyPriority('transition'),
+          });
+          // Establish the hidden starting style without an initial fade-out.
+          node.style.setProperty('transition', 'none', 'important');
           node.dataset.revealState = 'hidden';
           tracked.add(node);
-          observer?.observe(node);
+        }
+        if (added.length) {
+          // Commit the hidden styles before the observer can reveal above-the-fold
+          // content. Without this, initial hidden/visible writes may be coalesced.
+          for (const { node } of added) void window.getComputedStyle(node).opacity;
+          for (const { node, transition, priority } of added) {
+            if (transition) node.style.setProperty('transition', transition, priority);
+            else node.style.removeProperty('transition');
+            observer?.observe(node);
+          }
         }
       };
       scan();
