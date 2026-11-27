@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, type FormEvent } from 'react';
+import { Button, Input, Label, NativeSelect, Textarea } from './ui/form-controls';
 import SectionBanner from './section-banner';
 import styles from './contact-section.module.css';
 
@@ -54,23 +55,23 @@ export default function ContactSection() {
       </div>
       <form className={styles.form} onSubmit={sendEnquiry} aria-labelledby="enquiry-title">
         <h3 id="enquiry-title">Send your enquiry.</h3>
-        <label>Name <span aria-hidden="true">*</span><input name="name" autoComplete="name" required maxLength={100} placeholder="Name" /></label>
-        <label>Email <span aria-hidden="true">*</span><input name="email" type="email" autoComplete="email" required maxLength={150} placeholder="Email" /></label>
-        <label>Company<input name="company" autoComplete="organization" maxLength={120} /></label>
-        <label>Phone number <span aria-hidden="true">*</span><input name="phone" type="tel" autoComplete="tel" required maxLength={40} /></label>
-        <label className={styles.full}>Service
-          <select name="service">
+        <Label>Name <span aria-hidden="true">*</span><Input name="name" autoComplete="name" required maxLength={100} placeholder="Name" /></Label>
+        <Label>Email <span aria-hidden="true">*</span><Input name="email" type="email" autoComplete="email" required maxLength={150} placeholder="Email" /></Label>
+        <Label>Company<Input name="company" autoComplete="organization" maxLength={120} /></Label>
+        <Label>Phone number <span aria-hidden="true">*</span><Input name="phone" type="tel" autoComplete="tel" required maxLength={40} /></Label>
+        <Label className={styles.full}>Service
+          <NativeSelect name="service">
             <option>Website</option>
             <option>Mobile application</option>
             <option>Business software solutions</option>
             <option>Digital experience</option>
             <option>Other</option>
-          </select>
-        </label>
-        <label className={styles.full}>Tell us about your project <span aria-hidden="true">*</span>
-          <textarea name="message" required minLength={20} maxLength={1200} rows={5} placeholder="Please share at least 20 characters." />
-        </label>
-        <button type="submit" disabled={sending}>{sending ? 'Sending…' : 'Send enquiry'} <span aria-hidden="true">↗</span></button>
+          </NativeSelect>
+        </Label>
+        <Label className={styles.full}>Tell us about your project <span aria-hidden="true">*</span>
+          <Textarea name="message" required minLength={20} maxLength={1200} rows={5} placeholder="Please share at least 20 characters." />
+        </Label>
+        <Button type="submit" disabled={sending}>{sending ? 'Sending…' : 'Send enquiry'} <span aria-hidden="true">↗</span></Button>
         <p className={styles.full} role="status">{status}</p>
       </form>
     </section>
