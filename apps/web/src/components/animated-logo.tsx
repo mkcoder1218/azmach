@@ -5,11 +5,11 @@ import { gsap } from 'gsap';
 import styles from './animated-logo.module.css';
 
 function ArchitecturalA({ black = false }: { black?: boolean }) {
-  const main = black ? '#111111' : '#E61010';
-  const shade = black ? '#252525' : '#A80B0B';
-  const seam = black ? '#303030' : '#B50D0D';
-  const step = black ? '#1c1c1c' : '#C40E0E';
-  const base = black ? '#202020' : '#BD0D0D';
+  const main = black ? 'var(--logo-ink)' : '#E61010';
+  const shade = black ? 'var(--logo-shade)' : '#A80B0B';
+  const seam = black ? 'var(--logo-seam)' : '#B50D0D';
+  const step = black ? 'var(--logo-step)' : '#C40E0E';
+  const base = black ? 'var(--logo-base)' : '#BD0D0D';
   return (
     <>
       <path data-leg="left" fill={main} d="M 192 25 L 210 25 L 210 72 L 122 292 L 45 292 L 94 264 Z" />
@@ -33,7 +33,7 @@ function ArchitecturalA({ black = false }: { black?: boolean }) {
       <g data-sheet="">
         <path d="M 164 272 L 264 272 L 270 280 L 158 280 Z" fill={main} />
         <rect x="158" y="280" width="112" height="12" fill={base} />
-        <line x1="158" y1="280" x2="270" y2="280" stroke={black ? '#353535' : '#990A0A'} strokeWidth="1.5" />
+        <line x1="158" y1="280" x2="270" y2="280" stroke={black ? 'var(--logo-seam)' : '#990A0A'} strokeWidth="1.5" />
       </g>
     </>
   );
@@ -70,12 +70,12 @@ export default function AnimatedLogo() {
   return (
     <svg ref={ref} className={styles.logo} viewBox="0 0 345 48" aria-hidden="true" focusable="false">
       <g data-mark="" transform="translate(-6.75 -1.75) scale(.15)"><ArchitecturalA /></g>
-      <g fill="#111111">
+      <g fill="var(--logo-ink)">
         <path data-letter="" d="M61 4H96L75 36H96L92 44H57L79 12H57Z" />
         <path data-letter="" d="M102 4H108L123 24L138 4H144V44H137V18L123 36L109 18V44H102Z" />
       </g>
       <g data-mark="" transform="translate(143.25 -1.75) scale(.15)"><ArchitecturalA black /></g>
-      <g fill="#111111">
+      <g fill="var(--logo-ink)">
         <path data-letter="" d="M238 4H211L203 12V36L211 44H238L234 37H214L210 33V15L214 11H234Z" />
         <path data-letter="" d="M244 4H251V21H271V4H278V44H271V28H251V44H244Z" />
       </g>

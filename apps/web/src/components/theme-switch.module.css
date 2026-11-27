@@ -1,0 +1,22 @@
+.toggle {
+  position: relative; display: inline-grid; grid-template-columns: 1fr 1fr;
+  align-items: center; justify-items: center; width: 68px; height: 40px;
+  flex: 0 0 68px; padding: 3px; border: 1px solid var(--line);
+  border-radius: 9px; background: var(--surface-raised); color: var(--muted); cursor: pointer;
+}
+.thumb {
+  position: absolute; left: 3px; top: 3px; width: 30px; height: 32px;
+  border-radius: 6px; background: var(--card-start);
+  box-shadow: 0 2px 5px #0002; border: 1px solid var(--line);
+}
+.sun,.moon { width: 17px; height: 17px; position: relative; }
+.sun { color: var(--accent); }
+:global(html[data-theme="dark"]) .thumb { transform: translateX(30px); }
+:global(html[data-theme="dark"]) .sun { color: var(--muted); }
+:global(html[data-theme="dark"]) .moon { color: var(--accent); }
+@media (prefers-reduced-motion: no-preference) {
+  .thumb { transition: transform .42s cubic-bezier(.22,1,.36,1), background-color .42s; }
+  .sun,.moon { transition: color .35s, transform .42s cubic-bezier(.22,1,.36,1); }
+  :global(html[data-theme="dark"]) .sun { transform: rotate(-35deg) scale(.9); }
+  :global(html:not([data-theme="dark"])) .moon { transform: rotate(25deg) scale(.9); }
+}
