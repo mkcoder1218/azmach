@@ -1,3 +1,4 @@
+import DesktopNavigation from '../components/desktop-navigation';
 import AnimatedLogo from '../components/animated-logo';
 import styles from './page.module.css';
 
@@ -14,13 +15,7 @@ export default function HomePage() {
       <a className={styles.skip} href="#main">Skip to content</a>
       <header className={styles.header}>
         <a className={styles.brand} href="#top" aria-label="AZMACH.E home"><AnimatedLogo /></a>
-        <nav className={styles.nav} aria-label="Main navigation">
-          <a href="#top" className={styles.homeLink}>Home</a>
-          <a href="#services">Services</a>
-          <a href="#work">Our Works</a>
-          <a href="#about">About Us</a>
-          <a href="#contact">Contact</a>
-        </nav>
+        <DesktopNavigation />
         <div className={styles.actions}>
           <a className={styles.faqLink} href="#faqs">FAQs</a>
           <a className={styles.demoLink} href="#contact">Request a Demo <span aria-hidden="true">↗</span></a>
