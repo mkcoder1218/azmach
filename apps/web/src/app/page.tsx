@@ -356,16 +356,16 @@ export default function HomePage() {
           <div><h2 id="contact-title">Let’s build something.</h2><p>Have a project in mind, a question, or an idea worth exploring? Get in touch to discuss your next step or request a demo.</p></div>
           <div className="az-contact-links">
             <article data-card={0}>
-              <a className="az-contact-link" href="mailto:codemk1218@gmail.com">
+              <a className="az-contact-link" href="mailto:yetsadkanasefa@gmail.com">
                 <span className="az-contact-label">Email us</span>
-                <span className="az-contact-value">codemk1218@gmail.com <span className="az-contact-arrow" aria-hidden="true">↗</span></span>
+                <span className="az-contact-value">yetsadkanasefa@gmail.com <span className="az-contact-arrow" aria-hidden="true">↗</span></span>
                 <span className="az-contact-note">Tell us about your project or send an inquiry.</span>
               </a>
             </article>
             <article data-card={1}>
-              <a className="az-contact-link" href="tel:+251933894492">
+              <a className="az-contact-link" href="tel:+251941098721">
                 <span className="az-contact-label">Call us</span>
-                <span className="az-contact-value">+251 933 894 492 <span className="az-contact-arrow" aria-hidden="true">↗</span></span>
+                <span className="az-contact-value">+251 941 098 721 <span className="az-contact-arrow" aria-hidden="true">↗</span></span>
                 <span className="az-contact-note">Start a conversation directly by phone.</span>
               </a>
             </article>
