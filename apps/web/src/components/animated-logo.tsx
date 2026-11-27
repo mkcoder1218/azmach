@@ -4,36 +4,35 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import styles from './animated-logo.module.css';
 
-function ArchitecturalA({ black = false }: { black?: boolean }) {
-  const main = black ? 'var(--logo-ink)' : '#E61010';
-  const shade = black ? 'var(--logo-shade)' : '#A80B0B';
-  const seam = black ? 'var(--logo-seam)' : '#B50D0D';
-  const step = black ? 'var(--logo-step)' : '#C40E0E';
-  const base = black ? 'var(--logo-base)' : '#BD0D0D';
+function ArchitecturalA({ monochrome = false }: { monochrome?: boolean }) {
+  const main = monochrome ? 'var(--logo-ink)' : '#ff0004';
+  const shade = monochrome ? 'var(--logo-shade)' : '#c11720';
+
   return (
     <>
-      <path data-leg="left" fill={main} d="M 192 25 L 210 25 L 210 72 L 122 292 L 45 292 L 94 264 Z" />
-      <path data-leg="right" fill={main} d="M 218 25 L 236 25 L 334 264 L 383 292 L 306 292 L 218 72 Z" />
-      <g data-sheet="">
-        <polygon points="214,132 184,205 244,205" fill={main} />
-        <line x1="184" y1="205" x2="244" y2="205" stroke={shade} strokeWidth="1.5" />
+      <g data-leg="left">
+        <path fill={shade} d="M41.45,639.9l171.22.38,210.48-454.9V63l-43-.19L146.84,566.58Z" />
+        <path fill={main} d="M68.91,630.69l138.14.25L416.54,183.66V69.87l-33.07.46Q267.82,321.18,152.16,572Z" />
+      </g>
+      <g data-leg="right">
+        <path fill={shade} d="M821.6,639.63,650.38,640,439.9,185.11V62.73l43-.19q116.64,251.9,233.29,503.77Z" />
+        <path fill={main} d="M794.14,630.42,656,630.67,446.51,183.39V69.6l33.07.46Q595.25,320.92,710.89,571.77Z" />
       </g>
       <g data-sheet="">
-        <path d="M 183 207 L 245 207 L 252 217 L 176 217 Z" fill={main} />
-        <rect x="176" y="217" width="76" height="3" fill={seam} />
+        <path fill={shade} d="M363.26,458.6l129.09,0L427.83,320.12Q395.55,389.36,363.26,458.6Z" />
+        <path fill={main} d="M378.14,449l99.36,0L427.84,342.43Z" />
       </g>
       <g data-sheet="">
-        <path d="M 178 220 L 250 220 C 251 235, 255 245, 263 252 L 165 252 C 173 245, 177 235, 178 220 Z" fill={main} />
+        <path fill={main} d="M342.94,484.19,362,463.84l132.63-.09,19,20.35Z" />
+        <path fill={shade} d="M343,484.14H513.68a19.81,19.81,0,0,1-3.69,6.11,30,30,0,0,1-5.34,4.77H351.87a32.38,32.38,0,0,1-5.38-5.11A22,22,0,0,1,343,484.14Z" />
       </g>
       <g data-sheet="">
-        <path d="M 165 252 L 263 252 C 266 256, 265 262, 259 264 L 169 264 C 163 262, 162 256, 165 252 Z" fill={step} />
-        <rect x="169" y="264" width="90" height="5" fill={main} />
-        <rect x="167" y="269" width="94" height="3" fill={seam} />
+        <path fill={main} d="M351,499.26l154.89,0a82.49,82.49,0,0,0,17.47,36.31A75.5,75.5,0,0,0,539,549.52H317.62a71.48,71.48,0,0,0,16-13.69A78.23,78.23,0,0,0,351,499.26Z" />
+        <path fill={shade} d="M317.62,549.49l221.38,0a26.47,26.47,0,0,1,0,16.62c-4.05,11.82-15.33,16.18-17,16.78H334.74c-1.61-.57-12.9-4.79-17-16.55A26.4,26.4,0,0,1,317.62,549.49Z" />
       </g>
       <g data-sheet="">
-        <path d="M 164 272 L 264 272 L 270 280 L 158 280 Z" fill={main} />
-        <rect x="158" y="280" width="112" height="12" fill={base} />
-        <line x1="158" y1="280" x2="270" y2="280" stroke={black ? 'var(--logo-seam)' : '#990A0A'} strokeWidth="1.5" />
+        <path fill={main} d="M333.88,587.6h189a93.78,93.78,0,0,0,13.42,12,90.09,90.09,0,0,0,21,11.49l-257.93,0a101.52,101.52,0,0,0,18.38-9.93A104.68,104.68,0,0,0,333.88,587.6Z" />
+        <rect fill={shade} x="299.36" y="611.12" width="257.91" height="29.16" />
       </g>
     </>
   );
@@ -65,14 +64,14 @@ export default function AnimatedLogo() {
           const right = part.querySelector<SVGElement>('[data-leg="right"]');
           const sheets = Array.from(part.querySelectorAll<SVGElement>('[data-sheet]')).reverse();
           if (left) timeline.fromTo(left,
-            { x: -85, y: 45, rotation: -12, transformOrigin: '50% 50%', opacity: 0 },
+            { x: -196, y: 104, rotation: -12, transformOrigin: '50% 50%', opacity: 0 },
             { x: 0, y: 0, rotation: 0, opacity: 1, duration: .52 }, cursor);
           if (right) timeline.fromTo(right,
-            { x: 85, y: -45, rotation: 12, transformOrigin: '50% 50%', opacity: 0 },
+            { x: 196, y: -104, rotation: 12, transformOrigin: '50% 50%', opacity: 0 },
             { x: 0, y: 0, rotation: 0, opacity: 1, duration: .52 }, cursor + .1);
           sheets.forEach((sheet, index) => {
             timeline.fromTo(sheet,
-              { y: 65, opacity: 0 },
+              { y: 150, opacity: 0 },
               { y: 0, opacity: 1, duration: .38 },
               cursor + .25 + index * .13);
           });
@@ -92,12 +91,12 @@ export default function AnimatedLogo() {
 
   return (
     <svg ref={ref} className={styles.logo} viewBox="0 0 345 48" aria-hidden="true" focusable="false">
-      <g data-mark="" transform="translate(-6.75 -1.75) scale(.15)"><ArchitecturalA /></g>
+      <g data-mark="" transform="translate(-2.69 2.38) scale(.065)"><ArchitecturalA /></g>
       <g fill="var(--logo-ink)">
         <path data-letter="" d="M61 4H96L75 36H96L92 44H57L79 12H57Z" />
         <path data-letter="" d="M102 4H108L123 24L138 4H144V44H137V18L123 36L109 18V44H102Z" />
       </g>
-      <g data-mark="" transform="translate(143.25 -1.75) scale(.15)"><ArchitecturalA black /></g>
+      <g data-mark="" transform="translate(147.31 2.38) scale(.065)"><ArchitecturalA monochrome /></g>
       <g fill="var(--logo-ink)">
         <path data-letter="" d="M238 4H211L203 12V36L211 44H238L234 37H214L210 33V15L214 11H234Z" />
         <path data-letter="" d="M244 4H251V21H271V4H278V44H271V28H251V44H244Z" />
