@@ -106,7 +106,6 @@
 .heroBottom p { max-width: 27rem; color: var(--muted); }
 .cta { background: var(--accent); min-width: 13.5rem; padding: 1.05rem 1.3rem; }
 .heroFoot { border-top: 0; }
-.heroFoot span:last-child { background: var(--surface); padding: .5rem .75rem; }
 @media (max-width: 900px) {
   .artwork { inset: 0 0 0 23%; opacity: .45; }
   .heroBottom { width: min(100%, 30rem); }
@@ -117,7 +116,6 @@
   .artwork::after { background: linear-gradient(90deg, var(--surface), rgba(var(--hero-rgb),.28)); }
   .headline { font-size: clamp(2.25rem, 9.6vw, 4.5rem); }
   .heroBody { padding-block: 3rem; }
-  .heroFoot span:last-child { background: none; padding: 0; }
 }
 
 .actions { display: flex; align-items: center; gap: .65rem; white-space: nowrap; }
@@ -208,4 +206,35 @@
   .brand { min-width: 0; flex-shrink: 1; }
   .brand svg { max-width: 100%; }
   .mobileMenu > summary { gap: .35rem; }
+}
+
+/* Architectural scroll cue, kept independent of the section reveal effects. */
+.scrollCue {
+  display: inline-flex; align-items: center; gap: .9rem;
+  color: var(--foreground); background: color-mix(in srgb, var(--surface) 91%, transparent);
+  padding: .45rem .45rem .45rem 1rem; border: 1px solid var(--line);
+  border-radius: 40px; text-decoration: none; flex-shrink: 0;
+  box-shadow: 0 4px 24px #00000012;
+}
+.scrollCueLabel { display: grid; gap: .3rem; font-size: .72rem; letter-spacing: .06em; line-height: 1.15; }
+.scrollCueIndex { color: var(--accent); font-size: .57rem; letter-spacing: .15em; }
+.scrollCueDial { display: block; width: 48px; height: 48px; flex: none; }
+.scrollCueDial svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.scrollCueTrack { stroke: var(--line); stroke-width: 1; }
+.scrollCueArc { stroke: var(--accent); stroke-width: 1.6; stroke-dasharray: 24 76; transform-origin: center; transform: rotate(-90deg); }
+.scrollCueArrow { stroke: currentColor; stroke-width: 1.6; }
+.scrollCue:hover { color: var(--accent); border-color: var(--accent); }
+@media (prefers-reduced-motion: no-preference) {
+  .scrollCue { transition: color .3s, border-color .3s, box-shadow .3s, transform .4s cubic-bezier(.22,1,.36,1); }
+  .scrollCue:hover { transform: translateY(-3px); box-shadow: 0 8px 24px #0002; }
+  .scrollCueArc { animation: cue-orbit 3.2s linear infinite; }
+  .scrollCueArrow { animation: cue-nudge 2s ease-in-out infinite; }
+  @keyframes cue-orbit { to { transform: rotate(270deg); } }
+  @keyframes cue-nudge { 0%, 100% { transform: translateY(-2px); } 50% { transform: translateY(3px); } }
+}
+@media (max-width: 700px) {
+  .scrollCue { gap: .55rem; padding: .3rem .3rem .3rem .7rem; margin-left: auto; }
+  .scrollCueDial { width: 36px; height: 36px; }
+  .scrollCueLabel { font-size: .6rem; }
+  .scrollCueIndex { font-size: .5rem; }
 }

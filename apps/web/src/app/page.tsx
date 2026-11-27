@@ -206,7 +206,12 @@ export default function HomePage() {
               <a className={styles.cta} href="#about">Explore the vision <span aria-hidden="true">↘</span></a>
             </div>
           </div>
-          <div className={styles.heroFoot}><span>DESIGN / ENGINEERING / IMPACT</span><span>SCROLL TO EXPLORE ↓</span></div>
+          <div className={styles.heroFoot}><span>DESIGN / ENGINEERING / IMPACT</span><a className={styles.scrollCue} href="#services" aria-label="Scroll to explore our services" data-no-reveal="">
+            <span className={styles.scrollCueLabel}><span className={styles.scrollCueIndex}>01 / NEXT</span><span>Explore services</span></span>
+            <span className={styles.scrollCueDial} aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none"><circle className={styles.scrollCueTrack} cx="24" cy="24" r="22" /><circle className={styles.scrollCueArc} cx="24" cy="24" r="22" pathLength="100" /><path className={styles.scrollCueArrow} d="M24 14v19m-7-7 7 7 7-7" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            </span>
+          </a></div>
         </section>
         <ServicesSection />
         <section id="work" className={styles.about} aria-labelledby="work-title">
