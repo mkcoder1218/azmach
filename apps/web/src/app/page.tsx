@@ -188,7 +188,29 @@ export default function HomePage() {
         </section>
         <section id="about" className={styles.about} aria-labelledby="about-title">
           <p className={styles.sectionIndex}>01 / About</p>
-          <div><h2 id="about-title">Built with purpose.</h2><p>AZMACH.E is a personal space for software engineering, thoughtful design and the pursuit of meaningful progress.</p></div>
+          <div>
+            <h2 id="about-title">Built with purpose.</h2>
+            <p style={{ maxWidth: '48rem', fontSize: 'clamp(1.2rem, 2vw, 1.65rem)', lineHeight: 1.55, color: 'var(--foreground)' }}>Ethiopian roots. Global ambition. We believe technology should do more than work — it should create meaningful progress.</p>
+            <p style={{ maxWidth: '48rem' }}>AZMACH.E is an independent software engineering initiative focused on building thoughtful digital experiences and dependable systems. We bring design, engineering and practical problem-solving together to turn complex ideas into clear, useful products.</p>
+            <p style={{ maxWidth: '48rem' }}>From real-time platforms and business applications to cinematic websites, our approach begins with understanding the problem. We care about what happens behind the interface as much as what people see: architecture, security, performance and the ability to grow over time.</p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 220px), 1fr))', gap: '1.5rem', marginTop: 'clamp(2rem, 5vw, 4rem)', borderTop: '1px solid var(--line)' }}>
+              {[
+                { label: '01 / Mission', title: 'Build what matters.', description: 'Create useful, reliable software that solves real problems and gives people and businesses the tools to move forward.' },
+                { label: '02 / Vision', title: 'Think beyond borders.', description: 'Contribute to a future where Ethiopian engineering and creativity stand confidently on the global stage.' },
+                { label: '03 / Approach', title: 'Make every detail count.', description: 'Combine disciplined architecture, intentional design and continuous improvement, from the first idea to the final experience.' },
+              ].map((item, index) => (
+                <article key={item.label} data-card={index} style={{ paddingTop: '1.5rem', borderBottom: '1px solid var(--line)', paddingBottom: '1.5rem' }}>
+                  <span style={{ fontSize: '.69rem', fontWeight: 600, letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--accent)' }}>{item.label}</span>
+                  <h3 style={{ marginTop: '1rem', fontFamily: 'var(--font-space), sans-serif', fontSize: 'clamp(1.35rem, 2vw, 1.8rem)', letterSpacing: '-.045em', lineHeight: 1.2 }}>{item.title}</h3>
+                  <p style={{ marginTop: '.75rem', fontSize: '.95rem', lineHeight: 1.7 }}>{item.description}</p>
+                </article>
+              ))}
+            </div>
+            <div data-reveal="" style={{ marginTop: 'clamp(2rem, 4vw, 3rem)', paddingLeft: '1.25rem', borderLeft: '2px solid var(--accent)' }}>
+              <div style={{ fontFamily: 'var(--font-space), sans-serif', fontWeight: 600, fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', letterSpacing: '-.05em', lineHeight: 1.25 }}>Build today. Lead tomorrow.</div>
+              <div style={{ marginTop: '.75rem', color: 'var(--muted)', fontSize: '.9rem' }}>Progress is built through curiosity, ownership and consistent execution.</div>
+            </div>
+          </div>
         </section>
         <section id="principles" className={styles.principles} aria-labelledby="principles-title">
           <h2 id="principles-title" className={styles.sectionIndex}>02 / Principles</h2>
