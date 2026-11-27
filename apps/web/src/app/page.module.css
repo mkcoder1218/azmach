@@ -123,18 +123,11 @@
 .faqLink { background: var(--foreground); color: var(--button-ink); }
 .faqLink:hover, .faqLink:focus-visible { color: white; }
 .demoLink { background: var(--accent); }
-.mobileMenu { display: none; }
 .question { margin-top: 1.5rem; }
 .question summary { cursor: pointer; font-weight: 600; }
 @media (max-width: 1250px) {
   .header { gap: 1rem; }
   .actions { display: none; }
-  .mobileMenu { display: block; }
-  .mobileMenu > summary { display: flex; align-items: center; gap: .8rem; cursor: pointer; font-weight: 600; list-style: none; min-height: 44px; }
-  .mobileMenu > summary::-webkit-details-marker { display: none; }
-  .mobileMenu nav { position: absolute; inset: 100% 0 auto; background: var(--surface); padding: 1rem var(--gutter) 1.5rem; border-bottom: 1px solid var(--line); display: flex; flex-direction: column; gap: .25rem; box-shadow: 0 12px 18px #0000000d; }
-  .mobileMenu nav > a { padding: .8rem 0; font-weight: 600; }
-  .mobileMenu nav > .demoLink { padding: .8rem 1rem; align-self: flex-start; }
 }
 @media (prefers-reduced-motion: reduce) { .faqLink, .demoLink { transition: none; } }
 
@@ -205,7 +198,6 @@
   .header { gap: .5rem; }
   .brand { min-width: 0; flex-shrink: 1; }
   .brand svg { max-width: 100%; }
-  .mobileMenu > summary { gap: .35rem; }
 }
 
 /* Architectural scroll cue, kept independent of the section reveal effects. */

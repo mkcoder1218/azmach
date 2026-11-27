@@ -1,0 +1,31 @@
+.mobile { display: none; }
+@media (max-width: 1250px) { .mobile { display: block; flex-shrink: 0; } }
+.trigger { display: flex; align-items: center; gap: .35rem; min-height: 45px; color: var(--foreground); font-weight: 600; cursor: pointer; }
+.drawer { position: fixed; inset: 0 0 0 auto; margin: 0; padding: 0; width: min(88vw, 400px); max-width: none; height: 100dvh; max-height: none; border: 0; border-left: 1px solid var(--line); background: var(--surface); color: var(--foreground); overflow: auto; overscroll-behavior: contain; }
+.drawer::backdrop { background: rgb(0 0 0 / .48); }
+.panel { min-height: 100%; display: flex; flex-direction: column; padding: max(1.25rem, env(safe-area-inset-top)) 1.5rem max(1.5rem, env(safe-area-inset-bottom)); }
+.top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-bottom: 1.3rem; }
+.title { text-transform: uppercase; font-size: .68rem; letter-spacing: .14em; color: var(--muted); font-weight: 600; }
+.close { display: grid; place-items: center; width: 45px; height: 45px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface-raised); cursor: pointer; color: var(--foreground); }
+.links { display: grid; border-top: 1px solid var(--line); }
+.links a { display: grid; grid-template-columns: 1.6rem 1fr auto; align-items: center; gap: .65rem; min-height: 60px; padding: .85rem 0; border-bottom: 1px solid var(--line); font-size: clamp(1.15rem, 5vw, 1.6rem); font-weight: 600; }
+.number { font-size: .65rem; color: var(--accent); font-weight: 400; }
+.arrow { font-size: .95rem; color: var(--muted); }
+.links a:hover, .links a:focus-visible { color: var(--accent); }
+.demo { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 1.5rem; min-height: 45px; padding: .8rem 1.1rem; border-radius: 8px; background: #b91c1c; color: #fff; font-size: .85rem; font-weight: 600; }
+@media (prefers-reduced-motion: no-preference) {
+  .drawer[open] { animation: drawer-in .42s cubic-bezier(.22,1,.36,1) both; }
+  .drawer[open]::backdrop { animation: backdrop-in .42s ease both; }
+  .drawer[open] .links a { animation: link-in .48s cubic-bezier(.22,1,.36,1) both; }
+  .drawer[open] .demo { animation: link-in .48s .36s cubic-bezier(.22,1,.36,1) both; }
+  .drawer[open][data-closing] { animation: drawer-out .32s cubic-bezier(.55,0,.85,.4) both; }
+  .drawer[open][data-closing]::backdrop { animation: backdrop-out .32s ease both; }
+  .links a, .close, .demo { transition: color .2s, background-color .2s, transform .25s; }
+  .close:hover { transform: rotate(6deg); color: var(--accent); }
+  .links a:hover .arrow { color: var(--accent); }
+  @keyframes drawer-in { from { transform: translateX(100%); } to { transform: translateX(0); } }
+  @keyframes drawer-out { from { transform: translateX(0); } to { transform: translateX(100%); } }
+  @keyframes backdrop-in { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes backdrop-out { from { opacity: 1; } to { opacity: 0; } }
+  @keyframes link-in { from { opacity: 0; transform: translateX(18px); filter: blur(5px); } to { opacity: 1; transform: translateX(0); filter: blur(0); } }
+}

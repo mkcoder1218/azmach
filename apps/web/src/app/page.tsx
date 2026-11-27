@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import ServicesSection from '../components/services-section';
 import DesktopNavigation from '../components/desktop-navigation';
+import MobileNavigation from '../components/mobile-navigation';
 import ThemeSwitch from '../components/theme-switch';
 import AnimatedLogo from '../components/animated-logo';
 import styles from './page.module.css';
@@ -180,14 +181,7 @@ export default function HomePage() {
           <a className={styles.demoLink} href="#contact">Request a Demo <span aria-hidden="true">↗</span></a>
         </div>
         <div className={styles.mobileTheme}><ThemeSwitch /></div>
-        <details className={styles.mobileMenu}>
-          <summary>Menu <span aria-hidden="true">☰</span></summary>
-          <nav aria-label="Mobile navigation">
-            <a href="#top">Home</a><a href="#services">Services</a><a href="#work">Our Works</a>
-            <a href="#about">About Us</a><a href="#contact">Contact</a><a href="#faqs">FAQs</a>
-            <a className={styles.demoLink} href="#contact">Request a Demo ↗</a>
-          </nav>
-        </details>
+        <MobileNavigation />
       </header>
       <main id="main">
         <section className={styles.hero} aria-labelledby="hero-title">
