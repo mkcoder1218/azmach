@@ -191,7 +191,6 @@ export default function HomePage() {
           <div className={styles.artwork} aria-hidden="true" />
           <div className={styles.heroMeta}>
             <span><i aria-hidden="true" /> Ethiopian roots. Global ambition.</span>
-            <span>01 — Introduction</span>
           </div>
           <div className={styles.heroBody}>
             <div className={styles.eyebrow} data-reveal="">Independent software engineering</div>
@@ -263,7 +262,7 @@ export default function HomePage() {
           </div>
         </section>
         <section id="about" className={styles.about} aria-labelledby="about-title">
-          <p className={styles.sectionIndex}>01 / About</p>
+          <p className={styles.sectionIndex}>About</p>
           <div>
             <h2 id="about-title">Built with purpose.</h2>
             <p style={{ maxWidth: '48rem', fontSize: 'clamp(1.2rem, 2vw, 1.65rem)', lineHeight: 1.55, color: 'var(--foreground)' }}>Ethiopian roots. Global ambition. We believe technology should do more than work — it should create meaningful progress.</p>
@@ -274,7 +273,7 @@ export default function HomePage() {
                 <svg viewBox="0 0 345 48" focusable="false"><g transform="translate(-6.75 -1.75) scale(.15)"><AboutArchitecturalA /></g></svg>
               </div>
               <div className="az-brand-caption">
-                <span className="about-kicker">Our perspective / 01</span>
+                <span className="about-kicker">Our perspective</span>
                 <div className="about-statement" style={{ marginTop: '.85rem' }}>Build today.<br />Lead tomorrow.</div>
               </div>
             </div>
@@ -285,9 +284,9 @@ export default function HomePage() {
           </div>
           <div className="about-values">
             {[
-              { label: '01 / Mission', title: 'Build what matters.', description: 'Create useful, reliable software that solves real problems and gives people and businesses the tools to move forward.' },
-              { label: '02 / Vision', title: 'Think beyond borders.', description: 'Contribute to a future where Ethiopian engineering and creativity stand confidently on the global stage.' },
-              { label: '03 / Approach', title: 'Make every detail count.', description: 'Combine disciplined architecture, intentional design and continuous improvement, from the first idea to the final experience.' },
+              { label: 'Mission', title: 'Build what matters.', description: 'Create useful, reliable software that solves real problems and gives people and businesses the tools to move forward.' },
+              { label: 'Vision', title: 'Think beyond borders.', description: 'Contribute to a future where Ethiopian engineering and creativity stand confidently on the global stage.' },
+              { label: 'Approach', title: 'Make every detail count.', description: 'Combine disciplined architecture, intentional design and continuous improvement, from the first idea to the final experience.' },
             ].map((item) => (
               <div key={item.label} className="about-value">
                 <span className="about-kicker" data-reveal="">{item.label}</span>
@@ -299,7 +298,7 @@ export default function HomePage() {
         </section>
         <section id="principles" className="principle-manifesto" aria-labelledby="principles-title">
           <div className="principle-intro">
-            <span className={styles.sectionIndex} data-reveal="">02 / Principles</span>
+            <span className={styles.sectionIndex} data-reveal="">Principles</span>
             <div>
               <h2 id="principles-title">How we move forward.</h2>
               <p>Four principles. One direction. The way we think, create and deliver.</p>
@@ -350,14 +349,14 @@ export default function HomePage() {
           <div className="az-contact-links">
             <article data-card={0}>
               <a className="az-contact-link" href="mailto:codemk1218@gmail.com">
-                <span className="az-contact-label">01 / Email us</span>
+                <span className="az-contact-label">Email us</span>
                 <span className="az-contact-value">codemk1218@gmail.com <span className="az-contact-arrow" aria-hidden="true">↗</span></span>
                 <span className="az-contact-note">Tell us about your project or send an inquiry.</span>
               </a>
             </article>
             <article data-card={1}>
               <a className="az-contact-link" href="tel:+251933894492">
-                <span className="az-contact-label">02 / Call us</span>
+                <span className="az-contact-label">Call us</span>
                 <span className="az-contact-value">+251 933 894 492 <span className="az-contact-arrow" aria-hidden="true">↗</span></span>
                 <span className="az-contact-note">Start a conversation directly by phone.</span>
               </a>

@@ -105,7 +105,7 @@ export default function ServicesSection() {
 
   return (
     <section id="services" ref={section} className={styles.section} aria-labelledby="services-title">
-      <div className={styles.meta}><span><i /> 02 / What we do</span><span>DESIGN — DEVELOP — DELIVER</span></div>
+      <div className={styles.meta}><span><i /> What we do</span></div>
       <div className={styles.intro} data-reveal="">
         <h2 id="services-title">Ideas into<br /><em>real impact.</em></h2>
         <p>From the first concept to the final line of code, we build digital products with clarity, craft and purpose.</p>
@@ -113,7 +113,7 @@ export default function ServicesSection() {
       <div className={styles.cards}>
         {services.map((service, i) => (
           <article key={service.icon} className={styles.card} data-reveal="" data-card={i}>
-            <div className={styles.cardTop}><span>0{i + 1} / SERVICE</span><a href="#contact" aria-label={`Discuss ${service.title}`} className={styles.arrow}>↗</a></div>
+            <div className={styles.cardTop}><span>Service</span><a href="#contact" aria-label={`Discuss ${service.title}`} className={styles.arrow}>↗</a></div>
             <div className={styles.visual}><ServiceArtwork kind={service.icon} /></div>
             <div className={styles.copy}><h3>{service.title}</h3><p>{service.description}</p></div>
             <div className={styles.tags}>{service.tags.map(tag => <span key={tag}>{tag}</span>)}</div>
