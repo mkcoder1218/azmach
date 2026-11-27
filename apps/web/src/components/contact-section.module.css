@@ -78,6 +78,12 @@
     appearance: base-select;
   }
 
+  .form [data-slot="native-select"] {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+  }
+
   .form [data-slot="native-select"]::picker(select) {
     margin-top: .35rem;
     padding: .25rem;
@@ -89,6 +95,7 @@
   }
 
   .form [data-slot="native-select"]::picker-icon {
+    margin-inline-start: auto;
     color: var(--muted);
   }
 
