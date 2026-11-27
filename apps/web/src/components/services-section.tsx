@@ -46,10 +46,30 @@ export default function ServicesSection() {
     const media = gsap.matchMedia();
     media.add('(prefers-reduced-motion: no-preference)', () => {
       const nodes = Array.from(root.querySelectorAll<HTMLElement>('[data-service-reveal]'));
+      const drawings = Array.from(root.querySelectorAll<SVGGeometryElement>('svg path, svg rect, svg circle'));
+      const timelines = new Set<gsap.core.Timeline>();
       const observer = new IntersectionObserver(entries => {
         for (const entry of entries) {
           if (!entry.isIntersecting) continue;
           observer.unobserve(entry.target);
+          const delay = entry.target.hasAttribute('data-card') ? Number(entry.target.getAttribute('data-card')) * .075 : 0;
+          const shapes = Array.from(entry.target.querySelectorAll<SVGGeometryElement>('svg path, svg rect, svg circle'));
+          if (shapes.length) {
+            const timeline = gsap.timeline({ delay: delay + .28 });
+            timelines.add(timeline);
+            shapes.forEach((shape, index) => {
+              const length = Math.max(1, shape.getTotalLength());
+              timeline.fromTo(shape, { strokeDasharray: length + ' ' + length, strokeDashoffset: length }, {
+                strokeDashoffset: 0, duration: .72, ease: 'power2.inOut',
+                clearProps: 'strokeDasharray,strokeDashoffset',
+              }, index * .105);
+              if (shape.classList.contains(styles.red)) {
+                timeline.fromTo(shape, { fillOpacity: 0 }, {
+                  fillOpacity: .19, duration: .35, ease: 'power2.out', clearProps: 'fillOpacity',
+                }, index * .105 + .65);
+              }
+            });
+          }
           gsap.fromTo(entry.target, { opacity: 0, y: 16, filter: 'blur(7px)' }, {
             opacity: 1, y: 0, filter: 'blur(0px)', duration: .85, ease: 'power3.out',
             delay: entry.target.hasAttribute('data-card') ? Number(entry.target.getAttribute('data-card')) * .075 : 0,
@@ -60,6 +80,8 @@ export default function ServicesSection() {
       nodes.forEach(node => observer.observe(node));
       return () => {
         observer.disconnect();
+        timelines.forEach(timeline => timeline.kill());
+        gsap.set(drawings, { clearProps: 'strokeDasharray,strokeDashoffset,fillOpacity' });
         gsap.killTweensOf(nodes);
         gsap.set(nodes, { clearProps: 'opacity,transform,filter' });
       };
