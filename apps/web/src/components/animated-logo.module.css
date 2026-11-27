@@ -1,0 +1,2 @@
+.logo { display: block; width: clamp(10rem, 16vw, 19rem); height: auto; overflow: hidden; }
+@media (max-width: 1100px) { .logo { width: clamp(10rem, 30vw, 16rem); } }

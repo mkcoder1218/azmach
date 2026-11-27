@@ -1,3 +1,4 @@
+import AnimatedLogo from '../components/animated-logo';
 import styles from './page.module.css';
 
 const principles = [
@@ -12,7 +13,7 @@ export default function HomePage() {
     <div className={styles.shell} id="top">
       <a className={styles.skip} href="#main">Skip to content</a>
       <header className={styles.header}>
-        <a className={styles.brand} href="#top" aria-label="AZMACH.E home">AZMACH<span>.E</span></a>
+        <a className={styles.brand} href="#top" aria-label="AZMACH.E home"><AnimatedLogo /></a>
         <nav className={styles.nav} aria-label="Main navigation">
           <a href="#top" className={styles.homeLink}>Home</a>
           <a href="#services">Services</a>
