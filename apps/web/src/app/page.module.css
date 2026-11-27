@@ -384,28 +384,41 @@
 
 .industryGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
-  border-top: 1px solid var(--line);
-  border-inline-start: 1px solid var(--line);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(.65rem, 1.4vw, 1.25rem);
 }
 
 .industryGrid li {
-  display: flex;
-  align-items: center;
-  gap: .75rem;
-  min-height: 4rem;
-  padding: .85rem clamp(.85rem, 2vw, 1.5rem);
-  border-inline-end: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  font-size: clamp(.95rem, 1.4vw, 1.25rem);
+  display: grid;
+  align-content: space-between;
+  gap: 1rem;
+  min-height: clamp(6rem, 9vw, 8rem);
+  padding: clamp(.9rem, 1.8vw, 1.65rem);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: linear-gradient(145deg, var(--card-start), var(--card-end));
+  box-shadow: inset 0 1px 1px var(--highlight);
+  font-size: clamp(.95rem, 1.6vw, 1.4rem);
   font-weight: 600;
+  letter-spacing: -.025em;
+  line-height: 1.2;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
 }
 
 .industryGrid li::before {
   content: '';
-  flex: 0 0 .28rem;
-  height: .28rem;
+  width: 1.5rem;
+  height: 2px;
   background: var(--accent);
+}
+
+@media (max-width: 1000px) {
+  .industryGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 650px) {
+  .industryGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 .testimonialGrid {
