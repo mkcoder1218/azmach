@@ -93,6 +93,7 @@ export default function HomePage() {
   return (
     <div className={styles.shell} id="top">
       <style>{"\n@media (prefers-reduced-motion: no-preference) {\n  .work-choice { transition: color .35s ease, transform .45s cubic-bezier(.22,1,.36,1); }\n  .work-choice:hover { transform: translateX(4px); }\n  .work-choice:active { transform: translateX(4px) scale(.985); }\n  .work-arrow { transition: background .35s ease, color .35s ease, border-color .35s ease, transform .5s cubic-bezier(.22,1,.36,1); }\n  .work-choice[aria-pressed=\"true\"] .work-arrow { transform: rotate(-45deg); }\n  .work-details { transition: grid-template-rows .5s cubic-bezier(.22,1,.36,1), opacity .38s ease, filter .5s ease, transform .5s cubic-bezier(.22,1,.36,1), visibility .5s; }\n  .work-frame { animation: work-sharp .75s cubic-bezier(.22,1,.36,1) both; }\n  .work-address { animation: work-sharp .45s cubic-bezier(.22,1,.36,1) both; }\n  @keyframes work-sharp { from { opacity: 0; filter: blur(12px); transform: translateY(9px) scale(.985); } to { opacity: 1; filter: blur(0); transform: none; } }\n  .work-loading { animation: work-pulse 1.4s ease-in-out infinite alternate; }\n  @keyframes work-pulse { from { opacity: .45; } to { opacity: 1; } }\n}\n"}</style>
+      <style>{"\n.principle-manifesto { background: #171717; color: #f3f1ed; padding: clamp(3rem,7vw,7rem) var(--gutter); overflow: hidden; }\n.principle-intro { display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; align-items: start; margin-bottom: clamp(2rem,5vw,4rem); }\n.principle-intro h2 { font-family: var(--font-space),sans-serif; font-size: clamp(2.4rem,5vw,5rem); font-weight: 600; letter-spacing: -.065em; line-height: 1.05; }\n.principle-intro p { color: #aaa6a0; margin-top: 1rem; line-height: 1.6; }\n.principle-line { position: relative; display: grid; grid-template-columns: 3rem minmax(0,1fr) minmax(0,.65fr) 72px; align-items: center; gap: clamp(.75rem,3vw,3rem); padding: clamp(1rem,2vw,2rem) 0; border-top: 1px solid #ffffff29; }\n.principle-line:last-child { border-bottom: 1px solid #ffffff29; }\n.principle-line h3 { font-family: var(--font-space),sans-serif; font-size: clamp(2.8rem,7vw,7rem); font-weight: 600; letter-spacing: -.075em; line-height: .95; }\n.principle-line p { color: #b8b5af; font-size: clamp(.9rem,1.4vw,1.15rem); line-height: 1.65; max-width: 24rem; }\n.principle-number { color: #f08080; font-size: .72rem; letter-spacing: .13em; }\n.principle-icon { width: 100%; color: #f3f1ed; }\n.principle-line::before { content: ''; position: absolute; inset: 0 auto auto 0; height: 1px; width: 100%; background: #d93636; transform-origin: left; transform: scaleX(0); }\n@media(prefers-reduced-motion:no-preference) {\n  .principle-line::before { transition: transform .9s cubic-bezier(.22,1,.36,1); }\n  .principle-line[data-reveal-state=\"visible\"]::before { transform: scaleX(1); }\n  .principle-line h3,.principle-icon { transition: transform .55s cubic-bezier(.22,1,.36,1),color .35s; }\n  .principle-line:hover h3 { transform: translateX(12px); color: #f08080; }\n  .principle-line:hover .principle-icon { transform: rotate(-12deg) scale(1.1); color: #f08080; }\n  .principle-line .principle-trace { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.3s cubic-bezier(.22,1,.36,1); }\n  .principle-line[data-reveal-state=\"visible\"] .principle-trace { stroke-dashoffset: 0; }\n}\n@media(max-width:700px) { .principle-intro { grid-template-columns: 1fr; gap: 1rem; } .principle-line { grid-template-columns: 1.8rem minmax(0,1fr) 48px; gap: .65rem; } .principle-line p { grid-column: 2 / 3; grid-row: 2; } .principle-icon { grid-column: 3; grid-row: 1 / 3; } }\n@media(prefers-reduced-motion:reduce) { .principle-line::before { transform: none; } }\n"}</style>
       <style>{"\n.about-story { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,340px),1fr)); gap: clamp(2rem,5vw,6rem); align-items: center; margin-top: 1rem; }\n.about-visual { position: relative; overflow: hidden; background: #e8e5df; aspect-ratio: 5 / 3; color: #171717; display: grid; align-items: end; padding: clamp(1rem,3vw,2.5rem); isolation: isolate; }\n.about-visual svg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; }\n.about-statement { font-family: var(--font-space),sans-serif; font-size: clamp(2rem,4vw,4.2rem); font-weight: 600; line-height: .98; letter-spacing: -.07em; }\n.about-values { grid-column: 1 / -1; margin-top: clamp(1rem,3vw,3rem); border-top: 1px solid var(--line); }\n.about-value { display: grid; grid-template-columns: minmax(85px,.65fr) minmax(0,1.1fr) minmax(0,1.4fr); gap: clamp(1rem,3vw,3rem); align-items: center; padding: clamp(1.5rem,3vw,2.75rem) 0; border-bottom: 1px solid var(--line); }\n.about-value h3 { font-family: var(--font-space),sans-serif; font-size: clamp(1.4rem,2.7vw,2.6rem); font-weight: 600; letter-spacing: -.055em; line-height: 1.12; }\n#about .about-value p { margin: 0; font-size: 1rem; line-height: 1.65; }\n.about-kicker { color: var(--accent); font-size: .69rem; font-weight: 600; letter-spacing: .13em; text-transform: uppercase; }\n@media(max-width:700px) { .about-value { grid-template-columns: 1fr; gap: .7rem; } }\n@media(prefers-reduced-motion:no-preference) {\n  .about-visual .about-trace { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.7s cubic-bezier(.22,1,.36,1); }\n  .about-visual[data-reveal-state=\"visible\"] .about-trace { stroke-dashoffset: 0; }\n  .about-visual .about-orbit { transform-box: fill-box; transform-origin: center; transition: transform 1.5s cubic-bezier(.22,1,.36,1), opacity 1.2s; transform: rotate(-18deg) scale(.8); opacity: 0; }\n  .about-visual[data-reveal-state=\"visible\"] .about-orbit { transform: none; opacity: 1; }\n  .about-value { transition: background-color .35s ease; }\n  .about-value:hover { background-color: #eae7e2; }\n\n  .about-value:hover h3 { color: var(--accent); }\n}\n"}</style>
       <a className={styles.skip} href="#main">Skip to content</a>
       <header className={styles.header}>
@@ -231,12 +232,28 @@ export default function HomePage() {
             ))}
           </div>
         </section>
-        <section id="principles" className={styles.principles} aria-labelledby="principles-title">
-          <h2 id="principles-title" className={styles.sectionIndex}>02 / Principles</h2>
-          <div className={styles.cards}>
-            {principles.map((item) => (
-              <article key={item.number} className={styles.card}>
-                <span>{item.number}</span><h3>{item.title}</h3><p>{item.description}</p>
+        <section id="principles" className="principle-manifesto" aria-labelledby="principles-title">
+          <div className="principle-intro">
+            <span className={styles.sectionIndex} style={{ color: '#aaa6a0' }} data-reveal="">02 / Principles</span>
+            <div>
+              <h2 id="principles-title">How we move forward.</h2>
+              <p>Four principles. One direction. The way we think, create and deliver.</p>
+            </div>
+          </div>
+          <div>
+            {principles.map((item, index) => (
+              <article key={item.number} className="principle-line" data-card={index}>
+                <span className="principle-number">{item.number} /</span>
+                <h3>{item.title}.</h3>
+                <p>{item.description}</p>
+                <svg className="principle-icon" aria-hidden="true" viewBox="0 0 72 72" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path className="principle-trace" pathLength="1" d={[
+                    'M36 8 63 23 36 38 9 23 36 8 M9 36 36 51 63 36 M9 49 36 64 63 49',
+                    'M36 7V65 M7 36H65 M15 15 57 57 M57 15 15 57 M36 20 52 36 36 52 20 36Z',
+                    'M10 60 60 10 M30 10H60V40 M10 35V60H35',
+                    'M12 58 25 45 36 50 60 14 M40 14H60V34 M12 66H60'
+                  ][index]} />
+                </svg>
               </article>
             ))}
           </div>
