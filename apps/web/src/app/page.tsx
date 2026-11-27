@@ -21,8 +21,6 @@ const projects = [
     "description": "Legacy system analysis, desktop application development and software interoperability.",
     "href": "https://playbelman.com/",
     "linkLabel": "Visit website",
-    "mark": "KI",
-    "tone": "#18272c",
     "previewUrl": "https://playbelman.com/"
   },
   {
@@ -32,8 +30,6 @@ const projects = [
     "description": "Modular real-time platform with administration, cashier interfaces and service orchestration.",
     "href": "https://retail3.pleymanbet.com/",
     "linkLabel": "Visit website",
-    "mark": "A",
-    "tone": "#22242e",
     "previewUrl": "https://retail3.pleymanbet.com/"
   },
   {
@@ -43,8 +39,6 @@ const projects = [
     "description": "Cinematic media portfolio with interactive video showcases and motion-driven navigation.",
     "href": "https://stw-media.vercel.app/",
     "linkLabel": "Visit website",
-    "mark": "STW",
-    "tone": "#382522",
     "previewUrl": "https://stw-media.vercel.app/"
   },
   {
@@ -54,8 +48,6 @@ const projects = [
     "description": "Digital technology brand and web presence.",
     "href": "https://hyaw.tech",
     "linkLabel": "Visit website",
-    "mark": "H",
-    "tone": "#20332d",
     "previewUrl": "https://hyaw.tech/"
   }
 ];
@@ -63,6 +55,23 @@ const projects = [
 export default function HomePage() {
   const [preview, setPreview] = useState<(typeof projects)[number] | null>(null);
   const previewDialog = useRef<HTMLDialogElement>(null);
+  const workStage = useRef<HTMLDivElement>(null);
+  const [selectedProject, setSelectedProject] = useState(projects[2]);
+  const [stageVisible, setStageVisible] = useState(false);
+
+  useEffect(() => {
+    const stage = workStage.current;
+    if (!stage) return;
+    if (!('IntersectionObserver' in window)) {
+      setStageVisible(true);
+      return;
+    }
+    const observer = new IntersectionObserver(([entry]) => {
+      setStageVisible(entry.isIntersecting);
+    }, { threshold: 0 });
+    observer.observe(stage);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const dialog = previewDialog.current;
@@ -119,41 +128,48 @@ export default function HomePage() {
         <section id="work" className={styles.about} aria-labelledby="work-title">
           <p className={styles.sectionIndex}>Our Works</p>
           <div><h2 id="work-title">Selected work.</h2><p>A selection of systems, platforms and digital experiences across technology, media, commerce and everyday life.</p></div>
-          <div style={{ gridColumn: '1 / -1' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))', gap: '1.25rem', marginTop: '2rem' }}>
-              {projects.map((project, index) => (
-                <article key={project.number} data-card={index % 4} style={{ border: '1px solid var(--line)', overflow: 'hidden', display: 'flex', flexDirection: 'column', minWidth: 0 }}>
-                  <div aria-hidden="true" style={{ position: 'relative', overflow: 'hidden', aspectRatio: '16 / 10', background: project.tone, color: '#fff' }}>
-                    <svg viewBox="0 0 320 200" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" style={{ position: 'absolute', inset: 0 }}>
-                      <g fill="none" stroke="currentColor" opacity=".19">
-                        {Array.from({ length: 9 }, (_, line) => (
-                          <path key={line} d={`M ${line * 28 - 90} 200 L ${line * 28 + 130} 0`} />
-                        ))}
-                        <circle cx="240" cy="80" r="65" /><circle cx="240" cy="80" r="85" />
-                        <path d="M0 160H320M0 40H320M40 0V200M280 0V200" />
-                      </g>
-                      <text x="24" y="28" fill="currentColor" fontSize="10" letterSpacing="3">AZMACH.E / {project.number}</text>
-                      <text x="160" y="122" textAnchor="middle" fill="currentColor" fontSize="64" fontWeight="600" letterSpacing="-4">{project.mark}</text>
-                      <text x="24" y="182" fill="currentColor" fontSize="9" letterSpacing="2">SELECTED WORK</text>
-                    </svg>
-                  </div>
-                  <div style={{ padding: '1.5rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '.8rem' }}>
-                    <span style={{ color: 'var(--accent)', fontSize: '.75rem', fontWeight: 600 }}>{project.number} / {project.category}</span>
-                    <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontSize: '1.65rem', letterSpacing: '-.04em' }}>{project.title}</h3>
-                    <div style={{ color: 'var(--muted)', fontSize: '.95rem', lineHeight: 1.65, flex: 1 }}>{project.description}</div>
-                    {project.previewUrl && (
-                      <button type="button" className={styles.cta} style={{ marginTop: '.6rem', minWidth: 0, width: '100%', cursor: 'pointer', fontFamily: 'inherit' }} onClick={() => setPreview(project)}>
-                        Live preview <span aria-hidden="true">↗</span>
-                      </button>
+          <div style={{ gridColumn: '1 / -1', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 340px), 1fr))', gap: 'clamp(1.5rem, 4vw, 4rem)', alignItems: 'start', marginTop: '1rem' }}>
+            <div style={{ display: 'grid', borderTop: '1px solid var(--line)' }}>
+              {projects.map((project, index) => {
+                const active = selectedProject.number === project.number;
+                return (
+                  <article key={project.number} data-card={index} style={{ borderBottom: '1px solid var(--line)', padding: '1.25rem 0' }}>
+                    <button type="button" aria-pressed={active} aria-controls="work-preview" onClick={() => setSelectedProject(project)} style={{ display: 'grid', gridTemplateColumns: '2rem minmax(0, 1fr) 2.75rem', alignItems: 'center', gap: '.75rem', width: '100%', minHeight: '64px', textAlign: 'left', cursor: 'pointer', border: 0, padding: 0, background: 'transparent', color: active ? 'var(--accent)' : 'var(--foreground)', fontFamily: 'inherit' }}>
+                      <span style={{ fontSize: '.7rem', letterSpacing: '.08em', alignSelf: 'start', paddingTop: '.5rem' }}>{project.number}</span>
+                      <span style={{ display: 'grid', gap: '.35rem' }}>
+                        <span style={{ fontFamily: 'var(--font-space), sans-serif', fontSize: 'clamp(1.65rem, 3vw, 2.8rem)', fontWeight: 600, letterSpacing: '-.055em', lineHeight: 1.1 }}>{project.title}</span>
+                        <span style={{ fontSize: '.76rem', color: 'var(--muted)' }}>{project.category}</span>
+                      </span>
+                      <span aria-hidden="true" style={{ display: 'grid', placeItems: 'center', border: '1px solid ' + (active ? 'var(--accent)' : 'var(--line)'), borderRadius: '50%', width: '2.65rem', height: '2.65rem', fontSize: '1.2rem', background: active ? 'var(--accent)' : 'transparent', color: active ? '#fff' : 'inherit' }}>{active ? '↗' : '→'}</span>
+                    </button>
+                    {active && (
+                      <div style={{ padding: '.8rem 0 0 2.75rem', display: 'grid', gap: '.9rem' }}>
+                        <div style={{ color: 'var(--muted)', fontSize: '.9rem', lineHeight: 1.65 }}>{project.description}</div>
+                        <a href={project.href} target="_blank" rel="noopener noreferrer" style={{ width: 'fit-content', fontSize: '.8rem', fontWeight: 600, textDecoration: 'underline', textUnderlineOffset: '4px' }}>Visit website ↗</a>
+                      </div>
                     )}
-                    {project.href && (
-                      <a className={styles.cta} style={{ marginTop: '.25rem', minWidth: 0, alignSelf: 'stretch', ...(project.previewUrl ? { background: 'var(--foreground)' } : {}) }} href={project.href} target="_blank" rel="noopener noreferrer" aria-label={project.linkLabel + ': ' + project.title + ' (opens in a new tab)'}>
-                        {project.linkLabel} <span aria-hidden="true">↗</span>
-                      </a>
-                    )}
-                  </div>
-                </article>
-              ))}
+                  </article>
+                );
+              })}
+            </div>
+            <div ref={workStage} id="work-preview" data-no-reveal="" style={{ minWidth: 0, display: 'grid', gap: '.85rem' }}>
+              <div style={{ border: '1px solid var(--line)', background: '#fff', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 18px 45px #17171712' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '.6rem', padding: '.8rem 1rem', background: '#eae7e2', borderBottom: '1px solid var(--line)' }}>
+                  <span aria-hidden="true" style={{ color: '#8c8984', letterSpacing: '.15em', fontSize: '.85rem' }}>●●●</span>
+                  <span style={{ flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', textAlign: 'center', fontSize: '.72rem', color: '#57534e', background: '#faf9f7', borderRadius: '5px', padding: '.4rem .6rem' }}>{new URL(selectedProject.previewUrl).hostname}</span>
+                  <button type="button" onClick={() => setPreview(selectedProject)} aria-label={'Expand ' + selectedProject.title + ' preview'} style={{ border: 0, background: 'transparent', color: '#171717', cursor: 'pointer', fontSize: '1.1rem', minWidth: '2rem', minHeight: '2rem' }}>↗</button>
+                </div>
+                <div style={{ position: 'relative', aspectRatio: '16 / 11', background: '#f4f2ee', overflow: 'hidden' }}>
+                  {stageVisible && !preview && (
+                    <iframe key={selectedProject.number} title={selectedProject.title + ' inline website preview'} src={selectedProject.previewUrl} sandbox="allow-scripts allow-same-origin" referrerPolicy="no-referrer" loading="lazy" style={{ display: 'block', width: '100%', height: '100%', position: 'absolute', inset: 0, border: 0, background: '#fff' }} />
+                  )}
+                </div>
+              </div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '.8rem' }}>
+                <span style={{ color: 'var(--muted)', fontSize: '.7rem', letterSpacing: '.12em', textTransform: 'uppercase' }}>Live website / {selectedProject.number}</span>
+                <button type="button" onClick={() => setPreview(selectedProject)} style={{ border: 0, padding: '.6rem 0', background: 'transparent', color: 'var(--foreground)', fontFamily: 'inherit', fontWeight: 600, cursor: 'pointer', fontSize: '.8rem' }}>Expand preview ↗</button>
+              </div>
+              <span style={{ fontSize: '.75rem', color: 'var(--muted)' }}>If the preview is unavailable, visit the website directly.</span>
             </div>
           </div>
         </section>
