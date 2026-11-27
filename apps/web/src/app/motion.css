@@ -1,26 +1,36 @@
-/* Shared reveal language; content remains visible without JavaScript. */
+/* Shared two-way reveal: opacity and blur do not shift observed geometry. */
 @media (prefers-reduced-motion: no-preference) {
+  [data-reveal-state] {
+    transition-property: opacity, filter;
+    transition-duration: .48s;
+    transition-timing-function: cubic-bezier(.2,.7,.2,1);
+  }
+  [data-reveal-state][data-card] {
+    transition-property: opacity, filter, border-color, box-shadow;
+    transition-duration: .48s, .48s, .35s, .35s;
+  }
   [data-reveal-state='hidden']:not(:focus-within) {
     opacity: 0;
     filter: blur(9px);
-    translate: 0 16px;
+    transition-delay: 0ms;
   }
   [data-reveal-state='visible'] {
-    animation: azmach-reveal .85s cubic-bezier(.2,.7,.2,1) both;
-    animation-delay: var(--reveal-delay, 0ms);
+    opacity: 1;
+    filter: blur(0px);
+    transition-duration: .85s;
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  [data-reveal-state='visible'][data-card] {
+    transition-duration: .85s, .85s, .35s, .35s;
+    transition-delay: var(--reveal-delay, 0ms), var(--reveal-delay, 0ms), 0ms, 0ms;
   }
   [data-reveal-state]:focus-within {
     opacity: 1;
     filter: none;
-    translate: none;
-    animation: none;
+    transition: none;
   }
   [data-reveal-state][data-card='1'] { --reveal-delay: 75ms; }
   [data-reveal-state][data-card='2'] { --reveal-delay: 150ms; }
   [data-reveal-state][data-card='3'] { --reveal-delay: 225ms; }
-}
-@keyframes azmach-reveal {
-  from { opacity: 0; filter: blur(9px); translate: 0 16px; }
-  to { opacity: 1; filter: blur(0); translate: 0 0; }
 }
 html.lenis { scroll-behavior: auto !important; }

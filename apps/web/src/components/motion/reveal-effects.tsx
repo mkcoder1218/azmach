@@ -30,13 +30,9 @@ export default function RevealEffects() {
       observer = new IntersectionObserver(entries => {
         for (const entry of entries) {
           const node = entry.target as HTMLElement;
-          if (entry.isIntersecting) {
-            node.dataset.revealState = 'visible';
-          } else if (entry.boundingClientRect.bottom <= 0 || entry.boundingClientRect.top >= window.innerHeight) {
-            node.dataset.revealState = 'hidden';
-          }
+          node.dataset.revealState = entry.isIntersecting ? 'visible' : 'hidden';
         }
-      }, { threshold: 0, rootMargin: '0px 0px -5% 0px' });
+      }, { threshold: 0, rootMargin: '-8% 0px -8% 0px' });
 
       const scan = () => {
         for (const node of tracked) {
@@ -47,8 +43,7 @@ export default function RevealEffects() {
           // Reveal a card or explicit group as a unit; never animate its text twice.
           const ancestor = node.parentElement?.closest(selector);
           if (ancestor && (ancestor.matches('article, [data-reveal]'))) continue;
-          const bounds = node.getBoundingClientRect();
-          node.dataset.revealState = bounds.bottom > 0 && bounds.top < window.innerHeight * .95 ? 'visible' : 'hidden';
+          node.dataset.revealState = 'hidden';
           tracked.add(node);
           observer?.observe(node);
         }

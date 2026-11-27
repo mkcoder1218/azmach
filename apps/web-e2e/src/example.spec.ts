@@ -76,3 +76,21 @@ test('reduced motion leaves content visible', async ({ page }) => {
   await expect(page.locator('#services-title').locator('..')).not.toHaveAttribute('data-reveal-state', 'hidden');
   await expect(page.locator('html')).not.toHaveClass(/lenis/);
 });
+
+test('shared blur reveal fades out and returns in both scroll directions', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/');
+  const group = page.locator('#services-title').locator('..');
+  await group.scrollIntoViewIfNeeded();
+  await expect(group).toHaveAttribute('data-reveal-state', 'visible');
+  await expect(group).toHaveCSS('opacity', '1');
+  await group.evaluate(node => {
+    const bounds = node.getBoundingClientRect();
+    window.scrollTo({ top: window.scrollY + bounds.bottom - 20, behavior: 'instant' });
+  });
+  await expect(group).toHaveAttribute('data-reveal-state', 'hidden');
+  await expect(group).toHaveCSS('opacity', '0');
+  await group.scrollIntoViewIfNeeded();
+  await expect(group).toHaveAttribute('data-reveal-state', 'visible');
+  await expect(group).toHaveCSS('opacity', '1');
+});
