@@ -93,6 +93,7 @@ export default function HomePage() {
   return (
     <div className={styles.shell} id="top">
       <style>{"\n@media (prefers-reduced-motion: no-preference) {\n  .work-choice { transition: color .35s ease, transform .45s cubic-bezier(.22,1,.36,1); }\n  .work-choice:hover { transform: translateX(4px); }\n  .work-choice:active { transform: translateX(4px) scale(.985); }\n  .work-arrow { transition: background .35s ease, color .35s ease, border-color .35s ease, transform .5s cubic-bezier(.22,1,.36,1); }\n  .work-choice[aria-pressed=\"true\"] .work-arrow { transform: rotate(-45deg); }\n  .work-details { transition: grid-template-rows .5s cubic-bezier(.22,1,.36,1), opacity .38s ease, filter .5s ease, transform .5s cubic-bezier(.22,1,.36,1), visibility .5s; }\n  .work-frame { animation: work-sharp .75s cubic-bezier(.22,1,.36,1) both; }\n  .work-address { animation: work-sharp .45s cubic-bezier(.22,1,.36,1) both; }\n  @keyframes work-sharp { from { opacity: 0; filter: blur(12px); transform: translateY(9px) scale(.985); } to { opacity: 1; filter: blur(0); transform: none; } }\n  .work-loading { animation: work-pulse 1.4s ease-in-out infinite alternate; }\n  @keyframes work-pulse { from { opacity: .45; } to { opacity: 1; } }\n}\n"}</style>
+      <style>{"\n.about-story { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,340px),1fr)); gap: clamp(2rem,5vw,6rem); align-items: center; margin-top: 1rem; }\n.about-visual { position: relative; overflow: hidden; background: #e8e5df; aspect-ratio: 5 / 3; color: #171717; display: grid; align-items: end; padding: clamp(1rem,3vw,2.5rem); isolation: isolate; }\n.about-visual svg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; }\n.about-statement { font-family: var(--font-space),sans-serif; font-size: clamp(2rem,4vw,4.2rem); font-weight: 600; line-height: .98; letter-spacing: -.07em; }\n.about-values { grid-column: 1 / -1; margin-top: clamp(1rem,3vw,3rem); border-top: 1px solid var(--line); }\n.about-value { display: grid; grid-template-columns: minmax(85px,.65fr) minmax(0,1.1fr) minmax(0,1.4fr); gap: clamp(1rem,3vw,3rem); align-items: center; padding: clamp(1.5rem,3vw,2.75rem) 0; border-bottom: 1px solid var(--line); }\n.about-value h3 { font-family: var(--font-space),sans-serif; font-size: clamp(1.4rem,2.7vw,2.6rem); font-weight: 600; letter-spacing: -.055em; line-height: 1.12; }\n#about .about-value p { margin: 0; font-size: 1rem; line-height: 1.65; }\n.about-kicker { color: var(--accent); font-size: .69rem; font-weight: 600; letter-spacing: .13em; text-transform: uppercase; }\n@media(max-width:700px) { .about-value { grid-template-columns: 1fr; gap: .7rem; } }\n@media(prefers-reduced-motion:no-preference) {\n  .about-visual .about-trace { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.7s cubic-bezier(.22,1,.36,1); }\n  .about-visual[data-reveal-state=\"visible\"] .about-trace { stroke-dashoffset: 0; }\n  .about-visual .about-orbit { transform-box: fill-box; transform-origin: center; transition: transform 1.5s cubic-bezier(.22,1,.36,1), opacity 1.2s; transform: rotate(-18deg) scale(.8); opacity: 0; }\n  .about-visual[data-reveal-state=\"visible\"] .about-orbit { transform: none; opacity: 1; }\n  .about-value { transition: background-color .35s ease; }\n  .about-value:hover { background-color: #eae7e2; }\n\n  .about-value:hover h3 { color: var(--accent); }\n}\n"}</style>
       <a className={styles.skip} href="#main">Skip to content</a>
       <header className={styles.header}>
         <a className={styles.brand} href="#top" aria-label="AZMACH.E home"><AnimatedLogo /></a>
@@ -192,29 +193,43 @@ export default function HomePage() {
             <h2 id="about-title">Built with purpose.</h2>
             <p style={{ maxWidth: '48rem', fontSize: 'clamp(1.2rem, 2vw, 1.65rem)', lineHeight: 1.55, color: 'var(--foreground)' }}>Ethiopian roots. Global ambition. We believe technology should do more than work — it should create meaningful progress.</p>
           </div>
-          <div style={{ gridColumn: '1 / -1', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 340px), 1fr))', gap: 'clamp(1.5rem, 4vw, 4rem)', alignItems: 'start', borderTop: '1px solid var(--line)', paddingTop: 'clamp(1.5rem, 3vw, 2.5rem)' }}>
-            <div data-reveal="">
-              <span style={{ fontSize: '.69rem', fontWeight: 600, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--accent)' }}>Our perspective</span>
-              <div style={{ marginTop: '1rem', fontFamily: 'var(--font-space), sans-serif', fontSize: 'clamp(2rem, 4.5vw, 4rem)', fontWeight: 600, letterSpacing: '-.065em', lineHeight: 1.05 }}>Build today.<br />Lead tomorrow.</div>
+          <div className="about-story">
+            <div className="about-visual" data-reveal="">
+              <svg aria-hidden="true" viewBox="0 0 600 360" preserveAspectRatio="xMidYMid slice">
+                <g stroke="#171717" strokeWidth=".6" opacity=".13">
+                  {Array.from({length: 13}, (_, i) => <path key={i} d={`M${i * 50} 0V360 M0 ${i * 30}H600`} />)}
+                </g>
+                <g className="about-orbit" fill="none" stroke="#171717" strokeWidth="1" opacity=".4">
+                  <circle cx="440" cy="145" r="105" /><circle cx="440" cy="145" r="75" />
+                  <ellipse cx="440" cy="145" rx="43" ry="105" /><ellipse cx="440" cy="145" rx="105" ry="43" />
+                  <path d="M335 145H545M440 40V250" />
+                </g>
+                <path className="about-trace" pathLength="1" d="M0 295 L155 295 L315 135 L380 135 L490 25 L600 25" fill="none" stroke="#b91c1c" strokeWidth="2" />
+                <circle cx="490" cy="25" r="4" fill="#b91c1c" />
+              </svg>
+              <div>
+                <span className="about-kicker">Our perspective / 01</span>
+                <div className="about-statement" style={{ marginTop: '1rem' }}>Build today.<br />Lead tomorrow.</div>
+              </div>
             </div>
             <div>
-            <p style={{ maxWidth: '48rem', marginTop: 0 }}>AZMACH.E is an independent software engineering initiative focused on building thoughtful digital experiences and dependable systems. We bring design, engineering and practical problem-solving together to turn complex ideas into clear, useful products.</p>
-            <p style={{ maxWidth: '48rem' }}>From real-time platforms and business applications to cinematic websites, our approach begins with understanding the problem. We care about what happens behind the interface as much as what people see: architecture, security, performance and the ability to grow over time.</p>
+              <p style={{ maxWidth: '48rem', marginTop: 0 }}>AZMACH.E is an independent software engineering initiative focused on building thoughtful digital experiences and dependable systems. We bring design, engineering and practical problem-solving together to turn complex ideas into clear, useful products.</p>
+              <p style={{ maxWidth: '48rem' }}>From real-time platforms and business applications to cinematic websites, our approach begins with understanding the problem. We care about what happens behind the interface as much as what people see: architecture, security, performance and the ability to grow over time.</p>
             </div>
           </div>
-          <div style={{ gridColumn: '1 / -1', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))', gap: 'clamp(1.5rem, 4vw, 4rem)', marginTop: 'clamp(1rem, 2vw, 2rem)' }}>
-              {[
-                { label: '01 / Mission', title: 'Build what matters.', description: 'Create useful, reliable software that solves real problems and gives people and businesses the tools to move forward.' },
-                { label: '02 / Vision', title: 'Think beyond borders.', description: 'Contribute to a future where Ethiopian engineering and creativity stand confidently on the global stage.' },
-                { label: '03 / Approach', title: 'Make every detail count.', description: 'Combine disciplined architecture, intentional design and continuous improvement, from the first idea to the final experience.' },
-              ].map((item, index) => (
-                <article key={item.label} data-card={index} style={{ paddingTop: '1.5rem', borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)', paddingBottom: '1.5rem' }}>
-                  <span style={{ fontSize: '.69rem', fontWeight: 600, letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--accent)' }}>{item.label}</span>
-                  <h3 style={{ marginTop: '1rem', fontFamily: 'var(--font-space), sans-serif', fontSize: 'clamp(1.35rem, 2vw, 1.8rem)', letterSpacing: '-.045em', lineHeight: 1.2 }}>{item.title}</h3>
-                  <p style={{ marginTop: '.75rem', fontSize: '.95rem', lineHeight: 1.7 }}>{item.description}</p>
-                </article>
-              ))}
-            </div>
+          <div className="about-values">
+            {[
+              { label: '01 / Mission', title: 'Build what matters.', description: 'Create useful, reliable software that solves real problems and gives people and businesses the tools to move forward.' },
+              { label: '02 / Vision', title: 'Think beyond borders.', description: 'Contribute to a future where Ethiopian engineering and creativity stand confidently on the global stage.' },
+              { label: '03 / Approach', title: 'Make every detail count.', description: 'Combine disciplined architecture, intentional design and continuous improvement, from the first idea to the final experience.' },
+            ].map((item) => (
+              <div key={item.label} className="about-value">
+                <span className="about-kicker" data-reveal="">{item.label}</span>
+                <h3 data-reveal="" style={{ transitionDelay: 'var(--reveal-delay, 0ms)' }}>{item.title}</h3>
+                <p data-reveal="">{item.description}</p>
+              </div>
+            ))}
+          </div>
         </section>
         <section id="principles" className={styles.principles} aria-labelledby="principles-title">
           <h2 id="principles-title" className={styles.sectionIndex}>02 / Principles</h2>
