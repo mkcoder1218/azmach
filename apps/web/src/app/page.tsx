@@ -56,6 +56,34 @@ const projects = [
   }
 ];
 
+const industries = [
+  'E-commerce',
+  'Hotels',
+  'Gyms',
+  'Schools',
+  'Non-profit organisations',
+  'Legal firms',
+  'Hospitals',
+  'Consultancy',
+  'Businesses',
+  'Ed-tech platforms',
+  'Fitness & wellness',
+  'Trading & import/export',
+];
+
+const testimonials = [
+  {
+    name: 'TechMari',
+    industry: 'Ed-tech platform',
+    quote: 'We enjoyed working with Azmach.E. They were easy to communicate with, open to our feedback, and helpful throughout the project. We’re pleased with the final result.',
+  },
+  {
+    name: 'Eastern Travel and Tour',
+    industry: 'Travel',
+    quote: 'Working with Azmach.E was a good experience. They listened to what we wanted and made the website process easy for us. We’re happy with how it turned out.',
+  },
+];
+
 const faqItems = [
   [
     "What does AZMACH.E build?",
@@ -172,6 +200,14 @@ export default function HomePage() {
           </a></div>
         </section>
         <ServicesSection />
+        <section id="industries" className={styles.editorialSection} aria-labelledby="industries-title">
+          <h2 id="industries-title" className={styles.editorialTitle}>Industries we serve.</h2>
+          <ul className={styles.industryGrid}>
+            {industries.map((industry, index) => (
+              <li key={industry} data-reveal="" data-card={index % 4}>{industry}</li>
+            ))}
+          </ul>
+        </section>
         <section id="work" className={styles.about} aria-labelledby="work-title">
           <p className={styles.sectionIndex}>Our Works</p>
           <div><h2 id="work-title">Selected work.</h2><p>A selection of systems, platforms and digital experiences across technology, media, commerce and everyday life.</p></div>
@@ -225,6 +261,20 @@ export default function HomePage() {
               </div>
               <span style={{ fontSize: '.75rem', color: 'var(--muted)' }}>If the preview is unavailable, visit the website directly.</span>
             </div>
+          </div>
+        </section>
+        <section id="testimonials" className={styles.editorialSection} aria-labelledby="testimonials-title">
+          <h2 id="testimonials-title" className={styles.editorialTitle}>Testimonials.</h2>
+          <div className={styles.testimonialGrid}>
+            {testimonials.map(({ name, industry, quote }, index) => (
+              <figure key={name} className={styles.testimonial} data-reveal="" data-card={index}>
+                <blockquote><p>“{quote}”</p></blockquote>
+                <figcaption>
+                  <strong>{name}</strong>
+                  <span>{industry}</span>
+                </figcaption>
+              </figure>
+            ))}
           </div>
         </section>
         <section id="about" aria-labelledby="about-title">
