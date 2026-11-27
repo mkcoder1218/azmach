@@ -48,3 +48,11 @@ test('active navigation follows the visible section rather than a stale hash', a
   await expect(nav.getByRole('link', { name: 'Our Works' })).not.toHaveAttribute('aria-current', 'location');
   await expect(nav.getByRole('link', { name: 'Home' })).toHaveAttribute('data-highlighted', 'true');
 });
+
+test('services section presents four accessible service cards', async ({ page }) => {
+  await page.goto('/#services');
+  const section = page.locator('#services');
+  await expect(section.getByRole('heading', { level: 2 })).toContainText('real impact.');
+  await expect(section.getByRole('article')).toHaveCount(4);
+  await expect(section.getByRole('link', { name: 'Discuss Web development' })).toHaveAttribute('href', '#contact');
+});

@@ -1,3 +1,4 @@
+import ServicesSection from '../components/services-section';
 import DesktopNavigation from '../components/desktop-navigation';
 import AnimatedLogo from '../components/animated-logo';
 import styles from './page.module.css';
@@ -49,14 +50,7 @@ export default function HomePage() {
           </div>
           <div className={styles.heroFoot}><span>DESIGN / ENGINEERING / IMPACT</span><span>SCROLL TO EXPLORE ↓</span></div>
         </section>
-        <section id="services" className={styles.principles} aria-labelledby="services-title">
-          <h2 id="services-title" className={styles.sectionIndex}>Services</h2>
-          <div className={styles.cards}>
-            {['Web development', 'Mobile applications', 'Software engineering', 'Digital experiences'].map((service) => (
-              <article key={service} className={styles.card}><h3>{service}</h3></article>
-            ))}
-          </div>
-        </section>
+        <ServicesSection />
         <section id="work" className={styles.about} aria-labelledby="work-title">
           <p className={styles.sectionIndex}>Our Works</p>
           <div><h2 id="work-title">Selected work.</h2><p>Project case studies will be published here.</p></div>
