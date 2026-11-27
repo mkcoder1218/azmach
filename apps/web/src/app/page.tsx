@@ -135,7 +135,6 @@ export default function HomePage() {
       <style>{"\n@media (prefers-reduced-motion: no-preference) {\n  .work-choice { transition: color .35s ease, transform .45s cubic-bezier(.22,1,.36,1); }\n  .work-choice:hover { transform: translateX(4px); }\n  .work-choice:active { transform: translateX(4px) scale(.985); }\n  .work-arrow { transition: background .35s ease, color .35s ease, border-color .35s ease, transform .5s cubic-bezier(.22,1,.36,1); }\n  .work-choice[aria-pressed=\"true\"] .work-arrow { transform: rotate(-45deg); }\n  .work-details { transition: grid-template-rows .5s cubic-bezier(.22,1,.36,1), opacity .38s ease, filter .5s ease, transform .5s cubic-bezier(.22,1,.36,1), visibility .5s; }\n  .work-frame { animation: work-sharp .75s cubic-bezier(.22,1,.36,1) both; }\n  .work-address { animation: work-sharp .45s cubic-bezier(.22,1,.36,1) both; }\n  @keyframes work-sharp { from { opacity: 0; filter: blur(12px); transform: translateY(9px) scale(.985); } to { opacity: 1; filter: blur(0); transform: none; } }\n  .work-loading { animation: work-pulse 1.4s ease-in-out infinite alternate; }\n  @keyframes work-pulse { from { opacity: .45; } to { opacity: 1; } }\n}\n"}</style>
       <style>{"\n.az-faq-list { grid-column:1/-1; border-top:1px solid var(--line); margin-top:clamp(1rem,3vw,2rem); }\n.az-faq-row { border-bottom:1px solid var(--line); }\n.az-faq-button { display:grid; grid-template-columns:2.5rem minmax(0,1fr) 2.5rem; gap:clamp(.7rem,2vw,2rem); align-items:center; width:100%; text-align:left; background:transparent; color:var(--foreground); border:0; cursor:pointer; padding:clamp(1rem,2vw,1.65rem) 0; font:inherit; }\n.az-faq-button:hover,.az-faq-button[aria-expanded=\"true\"] { color:var(--accent); }\n.az-faq-number { font-size:.72rem; color:var(--muted); letter-spacing:.1em; }\n.az-faq-title { font-family:var(--font-space),sans-serif; font-size:clamp(1.2rem,2.3vw,1.85rem); font-weight:600; letter-spacing:-.035em; line-height:1.25; }\n.az-faq-icon { display:grid; place-items:center; width:2.5rem; height:2.5rem; border:1px solid var(--line); border-radius:50%; position:relative; }\n.az-faq-icon::before,.az-faq-icon::after { content:''; width:12px; height:1px; background:currentColor; position:absolute; }\n.az-faq-icon::after { transform:rotate(90deg); }\n.az-faq-button[aria-expanded=\"true\"] .az-faq-icon { background:var(--accent); color:white; border-color:var(--accent); }\n.az-faq-button[aria-expanded=\"true\"] .az-faq-icon::after { transform:rotate(0deg); }\n.az-faq-answer { display:grid; grid-template-rows:0fr; opacity:0; visibility:hidden; filter:blur(5px); }\n.az-faq-answer[data-open=\"true\"] { grid-template-rows:1fr; opacity:1; visibility:visible; filter:none; }\n.az-faq-answer > div { overflow:hidden; min-height:0; }\n#faqs .az-faq-answer p { margin:0 0 1.5rem; padding-left:calc(2.5rem + clamp(.7rem,2vw,2rem)); max-width:54rem; font-size:1rem; }\n@media(prefers-reduced-motion:no-preference) {\n.az-faq-button { transition:color .3s ease; }\n.az-faq-icon,.az-faq-icon::after { transition:transform .45s cubic-bezier(.22,1,.36,1),background-color .3s,color .3s; }\n.az-faq-answer { transition:grid-template-rows .5s cubic-bezier(.22,1,.36,1),opacity .4s,filter .5s,visibility .5s; }\n}\n"}</style>
       <style>{"\n.principle-manifesto { background: transparent; color: var(--foreground); padding: clamp(4rem,9vw,8rem) var(--gutter); border-block: 1px solid var(--line); overflow: hidden; }\n.principle-intro { display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; align-items: start; margin-bottom: clamp(2rem,5vw,4rem); }\n.principle-intro h2 { font-family: var(--font-space),sans-serif; font-size: clamp(2rem,5vw,4.5rem); font-weight: 600; letter-spacing: -.065em; line-height: 1.05; }\n.principle-intro p { color: var(--muted); margin-top: 1rem; line-height: 1.6; }\n.principle-line { position: relative; display: grid; grid-template-columns: 3rem minmax(0,1fr) minmax(0,.65fr) 56px; align-items: center; gap: clamp(.75rem,3vw,3rem); padding: clamp(1rem,2vw,1.75rem) 0; border-top: 1px solid var(--line); }\n.principle-line:last-child { border-bottom: 1px solid var(--line); }\n.principle-line h3 { font-family: var(--font-space),sans-serif; font-size: clamp(2rem,4.5vw,4.5rem); font-weight: 600; letter-spacing: -.075em; line-height: .95; }\n.principle-line p { color: var(--muted); font-size: clamp(.9rem,1.4vw,1.15rem); line-height: 1.65; max-width: 24rem; }\n.principle-number { color: var(--accent); font-size: .72rem; letter-spacing: .13em; }\n.principle-icon { width: 100%; color: var(--foreground); }\n.principle-line::before { content: ''; position: absolute; inset: 0 auto auto 0; height: 1px; width: 100%; background: var(--accent); transform-origin: left; transform: scaleX(0); }\n@media(prefers-reduced-motion:no-preference) {\n  .principle-line::before { transition: transform .9s cubic-bezier(.22,1,.36,1); }\n  .principle-line[data-reveal-state=\"visible\"]::before { transform: scaleX(.065); }\n  .principle-line h3,.principle-icon { transition: transform .55s cubic-bezier(.22,1,.36,1),color .35s; }\n  .principle-line:hover h3 { transform: translateX(12px); color: var(--accent); }\n  .principle-line:hover .principle-icon { transform: rotate(-12deg) scale(1.1); color: var(--accent); }\n  .principle-line .principle-trace { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.3s cubic-bezier(.22,1,.36,1); }\n  .principle-line[data-reveal-state=\"visible\"] .principle-trace { stroke-dashoffset: 0; }\n}\n@media(max-width:700px) { .principle-intro { grid-template-columns: 1fr; gap: 1rem; } .principle-line { grid-template-columns: 1.8rem minmax(0,1fr) 48px; gap: .65rem; } .principle-line p { grid-column: 2 / 3; grid-row: 2; } .principle-icon { grid-column: 3; grid-row: 1 / 3; } }\n@media(prefers-reduced-motion:reduce) { .principle-line::before { transform: scaleX(.065); } }\n"}</style>
-      <style>{"\n.about-story { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,340px),1fr)); gap: clamp(2rem,5vw,6rem); align-items: center; margin-top: 1rem; }\n.about-values { grid-column: 1 / -1; margin-top: clamp(1rem,3vw,3rem); border-top: 1px solid var(--line); }\n.about-value { display: grid; grid-template-columns: minmax(85px,.65fr) minmax(0,1.1fr) minmax(0,1.4fr); gap: clamp(1rem,3vw,3rem); align-items: center; padding: clamp(1.5rem,3vw,2.75rem) 0; border-bottom: 1px solid var(--line); }\n.about-value h3 { font-family: var(--font-space),sans-serif; font-size: clamp(1.4rem,2.7vw,2.6rem); font-weight: 600; letter-spacing: -.055em; line-height: 1.12; }\n#about .about-value p { margin: 0; font-size: 1rem; line-height: 1.65; }\n.about-kicker { color: var(--accent); font-size: .69rem; font-weight: 600; letter-spacing: .13em; text-transform: uppercase; }\n@media(max-width:700px) { .about-value { grid-template-columns: 1fr; gap: .7rem; } }\n@media(prefers-reduced-motion:no-preference) {\n  .about-value { transition: background-color .35s ease; }\n  .about-value:hover { background-color: var(--surface-raised); }\n\n  .about-value:hover h3 { color: var(--accent); }\n}\n"}</style>
       <a className={styles.skip} href="#main">Skip to content</a>
       <header className={styles.header}>
         <a className={styles.brand} href="#top" aria-label="AZMACH.E home"><AnimatedLogo /></a>
@@ -229,39 +228,25 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-        <section id="about" className={styles.about} aria-labelledby="about-title">
-          <p className={styles.sectionIndex}>About</p>
-          <div>
-            <h2 id="about-title">Built with purpose.</h2>
-            <p style={{ maxWidth: '48rem', fontSize: 'clamp(1.2rem, 2vw, 1.65rem)', lineHeight: 1.55, color: 'var(--foreground)' }}>Ethiopian roots. Global ambition. We believe technology should do more than work — it should create meaningful progress.</p>
-          </div>
-          <SectionBanner section="about" />
-          <div className="about-story">
-            <div className={styles.aboutStatement} data-reveal="">
-              <span className="about-kicker">Our perspective</span>
-              <strong>
-                <span>Build today.</span>
-                <span>Lead tomorrow.</span>
-              </strong>
-            </div>
-            <div>
-              <p style={{ maxWidth: '48rem', marginTop: 0 }}>AZMACH.E is an independent software engineering initiative focused on building thoughtful digital experiences and dependable systems. We bring design, engineering and practical problem-solving together to turn complex ideas into clear, useful products.</p>
-              <p style={{ maxWidth: '48rem' }}>From real-time platforms and business applications to cinematic websites, our approach begins with understanding the problem. We care about what happens behind the interface as much as what people see: architecture, security, performance and the ability to grow over time.</p>
+        <section id="about" aria-labelledby="about-title">
+          <div className={styles.aboutStory}>
+            <h2 id="about-title" data-reveal="">Our Story</h2>
+            <div className={styles.storyCopy} data-reveal="">
+              <h3>A vision that became a beginning.</h3>
+              <p>AZMACH.E began in 2026 as a company, built on nearly five years of professional experience creating digital solutions.</p>
+              <p>Today, we help businesses through websites, applications, design, and ongoing support. Our longer-term ambition is to build technology products that strengthen education, businesses, and African innovation.</p>
             </div>
           </div>
-          <div className="about-values">
-            {[
-              { label: 'Mission', title: 'Build what matters.', description: 'Create useful, reliable software that solves real problems and gives people and businesses the tools to move forward.' },
-              { label: 'Vision', title: 'Think beyond borders.', description: 'Contribute to a future where Ethiopian engineering and creativity stand confidently on the global stage.' },
-              { label: 'Approach', title: 'Make every detail count.', description: 'Combine disciplined architecture, intentional design and continuous improvement, from the first idea to the final experience.' },
-            ].map((item) => (
-              <div key={item.label} className="about-value">
-                <span className="about-kicker" data-reveal="">{item.label}</span>
-                <h3 data-reveal="" style={{ transitionDelay: 'var(--reveal-delay, 0ms)' }}>{item.title}</h3>
-                <p data-reveal="">{item.description}</p>
-              </div>
-            ))}
-          </div>
+          <section className={styles.founder} aria-labelledby="founder-title">
+            <SectionBanner section="about" />
+            <h3 id="founder-title" data-reveal="">A message from the founder</h3>
+            <figure className={styles.founderQuote} data-reveal="">
+              <blockquote>
+                <p>“AZMACH.E began as a personal vision, but it has never been about one person. It is about what we can build together. Every project we complete is another opportunity to learn, improve, and move closer to our vision. We are only at the beginning of our journey, and I invite every client, partner, and future team member to be part of what comes next.”</p>
+              </blockquote>
+              <figcaption>Founder · AZMACH.E</figcaption>
+            </figure>
+          </section>
         </section>
         <section id="principles" className="principle-manifesto" aria-labelledby="principles-title">
           <div className="principle-intro">
