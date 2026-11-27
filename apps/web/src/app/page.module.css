@@ -70,9 +70,21 @@
   .cta, .card { transition: none; }
 }
 
-/* Keep the hero content independent of the WebGL renderer. */
-.artwork { position: absolute; inset: 0 0 0 40%; z-index: -1; pointer-events: none; overflow: hidden; }
-.artwork::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, var(--background), transparent 30%); }
+
+/* Static architectural photography; no client-side rendering required. */
+.artwork {
+  position: absolute;
+  inset: 0 0 0 38%;
+  z-index: -1;
+  pointer-events: none;
+  background: url('/architectural-hero.webp') 47% center / cover no-repeat;
+}
+.artwork::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--background) 0%, transparent 34%);
+}
 .heroBody { position: relative; }
 .headline { font-size: clamp(2.7rem, 7vw, 7.5rem); }
 .heroBottom { align-items: start; flex-direction: column; width: min(45%, 38rem); gap: 1.5rem; }
