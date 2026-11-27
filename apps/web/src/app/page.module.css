@@ -442,6 +442,14 @@
   line-height: 1.65;
 }
 
+.testimonialIcon {
+  display: block;
+  width: clamp(1.5rem, 2vw, 2rem);
+  height: auto;
+  margin-bottom: .85rem;
+  color: var(--accent);
+}
+
 .testimonial figcaption {
   display: grid;
   gap: .3rem;

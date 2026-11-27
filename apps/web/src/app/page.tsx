@@ -273,7 +273,12 @@ export default function HomePage() {
           <div className={styles.testimonialGrid}>
             {testimonials.map(({ name, industry, quote }, index) => (
               <figure key={name} className={styles.testimonial} data-reveal="" data-card={index}>
-                <blockquote><p>“{quote}”</p></blockquote>
+                <blockquote>
+                  <svg className={styles.testimonialIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M10 5c-4 1-6 4-6 8v5h6v-6H7m13-7c-4 1-6 4-6 8v5h6v-6h-3" />
+                  </svg>
+                  <p>“{quote}”</p>
+                </blockquote>
                 <figcaption>
                   <strong>{name}</strong>
                   <span>{industry}</span>
