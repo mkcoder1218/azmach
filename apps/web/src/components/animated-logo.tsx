@@ -48,21 +48,43 @@ export default function AnimatedLogo() {
     const media = gsap.matchMedia();
     media.add('(prefers-reduced-motion: no-preference)', () => {
       const timeline = gsap.timeline({ defaults: { ease: 'power3.out' } });
-      const marks = Array.from(svg.querySelectorAll<SVGGElement>('[data-mark]'));
-      const letters = Array.from(svg.querySelectorAll<SVGPathElement>('[data-letter]'));
-      marks.forEach((mark, index) => {
-        const start = index === 0 ? 0 : 0.36;
-        const left = mark.querySelector('[data-leg="left"]');
-        const right = mark.querySelector('[data-leg="right"]');
-        const sheets = Array.from(mark.querySelectorAll('[data-sheet]')).reverse();
-        timeline.fromTo(left, { x: -28, y: 35, opacity: 0 }, { x: 0, y: 0, opacity: 1, duration: 0.44 }, start);
-        timeline.fromTo(right, { x: 28, y: -35, opacity: 0 }, { x: 0, y: 0, opacity: 1, duration: 0.44 }, start + 0.06);
-        timeline.fromTo(sheets, { y: 34, opacity: 0 }, { y: 0, opacity: 1, duration: 0.32, stagger: 0.065 }, start + 0.18);
-      });
-      letters.forEach((letter, index) => {
-        const start = [0.24, 0.34, 0.57, 0.67, 0.78, 0.85][index];
-        timeline.fromTo(letter, { x: -7, opacity: 0, clipPath: 'inset(0 100% 0 0)' }, { x: 0, opacity: 1, clipPath: 'inset(0 0% 0 0)', duration: 0.42 }, start);
-      });
+      const parts = Array.from(svg.querySelectorAll<SVGElement>('[data-mark], [data-letter]'));
+      const animated = parts.flatMap(part =>
+        part.hasAttribute('data-mark')
+          ? Array.from(part.querySelectorAll<SVGElement>('[data-leg], [data-sheet]'))
+          : [part]
+      );
+
+      gsap.set(animated, { opacity: 0 });
+      let cursor = 0;
+
+      for (const part of parts) {
+        if (part.hasAttribute('data-mark')) {
+          const left = part.querySelector<SVGElement>('[data-leg="left"]');
+          const right = part.querySelector<SVGElement>('[data-leg="right"]');
+          const sheets = Array.from(part.querySelectorAll<SVGElement>('[data-sheet]')).reverse();
+          if (left) timeline.fromTo(left,
+            { x: -85, y: 45, rotation: -12, transformOrigin: '50% 50%', opacity: 0 },
+            { x: 0, y: 0, rotation: 0, opacity: 1, duration: .52 }, cursor);
+          if (right) timeline.fromTo(right,
+            { x: 85, y: -45, rotation: 12, transformOrigin: '50% 50%', opacity: 0 },
+            { x: 0, y: 0, rotation: 0, opacity: 1, duration: .52 }, cursor + .1);
+          sheets.forEach((sheet, index) => {
+            timeline.fromTo(sheet,
+              { y: 65, opacity: 0 },
+              { y: 0, opacity: 1, duration: .38 },
+              cursor + .25 + index * .13);
+          });
+          cursor += .96;
+        } else {
+          timeline.fromTo(part,
+            { y: 13, x: -4, opacity: 0, scale: .94, transformOrigin: '50% 50%', filter: 'blur(4px)' },
+            { y: 0, x: 0, opacity: 1, scale: 1, filter: 'blur(0px)', duration: .48 },
+            cursor);
+          cursor += .19;
+        }
+      }
+      timeline.set(animated, { clearProps: 'transform,transformOrigin,filter,opacity' });
     });
     return () => media.revert();
   }, []);
