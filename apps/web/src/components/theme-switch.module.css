@@ -1,11 +1,11 @@
 .toggle {
   position: relative; display: inline-grid; grid-template-columns: 1fr 1fr;
-  align-items: center; justify-items: center; width: 68px; height: 40px;
+  align-items: center; justify-items: center; width: 68px; height: 45px;
   flex: 0 0 68px; padding: 3px; border: 1px solid var(--line);
-  border-radius: 9px; background: var(--surface-raised); color: var(--muted); cursor: pointer;
+  border-radius: 8px; background: var(--surface-raised); color: var(--muted); cursor: pointer;
 }
 .thumb {
-  position: absolute; left: 3px; top: 3px; width: 30px; height: 32px;
+  position: absolute; left: 3px; top: 3px; bottom: 3px; width: 30px;
   border-radius: 6px; background: var(--card-start);
   box-shadow: 0 2px 5px #0002; border: 1px solid var(--line);
 }
