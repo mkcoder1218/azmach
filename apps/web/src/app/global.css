@@ -42,7 +42,6 @@ button .az-faq-title, button span[style*='font-family'] { font-family: var(--fon
   --card-end: #f4f1ed;
   --highlight: #ffffff;
   --button-ink: #fff;
-  --hero-rgb: 250,249,247;
   --logo-ink: #111111;
   --logo-shade: #252525;
   --logo-seam: #303030;
@@ -62,7 +61,6 @@ button .az-faq-title, button span[style*='font-family'] { font-family: var(--fon
   --card-end: #1b1b1b;
   --highlight: #343230;
   --button-ink: #171717;
-  --hero-rgb: 25,25,25;
   --logo-ink: #f4f1ed;
   --logo-shade: #c7c2bc;
   --logo-seam: #9d9892;
