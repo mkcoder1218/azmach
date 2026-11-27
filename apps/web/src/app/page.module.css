@@ -21,7 +21,7 @@
 .heroMeta i { display: inline-block; width: .5rem; height: .5rem; background: var(--accent); margin-right: .55rem; }
 .heroBody { padding-block: clamp(3rem, 10vh, 8rem); }
 .eyebrow { margin-bottom: 1.25rem; color: var(--muted); }
-.headline { margin: 0; font-size: clamp(2.7rem, 9.7vw, 10rem); line-height: .95; font-weight: 700; letter-spacing: -.085em; }
+.headline { margin: 0; font-family: var(--font-hero-inter), var(--font-heading); font-size: clamp(2.7rem, 9.7vw, 10rem); line-height: .95; font-weight: 900; letter-spacing: -.085em; }
 .headline span { display: block; }
 .headline span:first-child { color: var(--accent); }
 .heroBottom {

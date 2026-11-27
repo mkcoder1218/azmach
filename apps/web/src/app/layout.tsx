@@ -7,7 +7,7 @@ import './motion.css';
 import SmoothScroll from '../components/motion/smooth-scroll';
 import RevealEffects from '../components/motion/reveal-effects';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
+const inter = Inter({ subsets: ['latin'], variable: '--font-hero-inter', display: 'swap' });
 const space = Space_Grotesk({ subsets: ['latin'], variable: '--font-space', display: 'swap' });
 
 export const metadata: Metadata = {
