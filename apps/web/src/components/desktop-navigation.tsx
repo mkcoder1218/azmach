@@ -34,7 +34,7 @@ export default function DesktopNavigation() {
         setActive('#top');
         return;
       }
-      let current: string = '#top';
+      let current = '#top';
       for (const section of sections) {
         if (section.element && section.element.getBoundingClientRect().top <= threshold) {
           current = section.href;
