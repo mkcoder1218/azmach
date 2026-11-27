@@ -12,14 +12,14 @@ export default function SectionBanner({ section }: { section: BannerSection }) {
         className={styles.light}
         src={`${directory}/${section}-light.webp`}
         fill
-        sizes="90vw"
+        sizes="100vw"
         alt=""
       />
       <Image
         className={styles.dark}
         src={`${directory}/${section}-dark.webp`}
         fill
-        sizes="90vw"
+        sizes="100vw"
         alt=""
       />
     </div>
