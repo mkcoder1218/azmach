@@ -95,7 +95,7 @@ export default function HomePage() {
   const [preview, setPreview] = useState<(typeof projects)[number] | null>(null);
   const previewDialog = useRef<HTMLDialogElement>(null);
   const workStage = useRef<HTMLDivElement>(null);
-  const [selectedProject, setSelectedProject] = useState(projects[2]);
+  const [selectedProject, setSelectedProject] = useState(projects[0]);
   const [stageVisible, setStageVisible] = useState(false);
   const [frameReady, setFrameReady] = useState(false);
 
