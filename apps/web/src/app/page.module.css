@@ -245,3 +245,42 @@
   .scrollCueLabel { font-size: .6rem; }
   .scrollCueIndex { font-size: .5rem; }
 }
+
+.aboutStatement {
+  display: grid;
+  align-content: end;
+  gap: 1rem;
+  min-height: clamp(15rem, 25vw, 22rem);
+  padding: clamp(1.25rem, 3.5vw, 3rem);
+  border-inline-start: 2px solid var(--accent);
+  background: linear-gradient(135deg, var(--surface-raised), var(--surface));
+}
+
+.aboutStatement strong {
+  font-size: clamp(1.85rem, 4.4vw, 4.75rem);
+  line-height: 1.03;
+  letter-spacing: -.065em;
+}
+
+.aboutStatement strong span {
+  display: block;
+}
+
+.aboutStatement strong span:last-child {
+  color: var(--accent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .aboutStatement strong span {
+    transition: transform .65s cubic-bezier(.22, 1, .36, 1), opacity .55s ease;
+  }
+
+  .aboutStatement[data-reveal-state="hidden"] strong span {
+    transform: translateY(.55em);
+    opacity: 0;
+  }
+
+  .aboutStatement[data-reveal-state="visible"] strong span:last-child {
+    transition-delay: .16s;
+  }
+}
