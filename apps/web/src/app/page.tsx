@@ -21,7 +21,6 @@ export default function HomePage() {
       </header>
       <main id="main">
         <section className={styles.hero} aria-labelledby="hero-title">
-          <div className={styles.grid} aria-hidden="true" />
           <div className={styles.artwork} aria-hidden="true" />
           <div className={styles.heroMeta}>
             <span><i aria-hidden="true" /> Ethiopian roots. Global ambition.</span>
