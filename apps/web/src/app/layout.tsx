@@ -21,8 +21,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={inter.variable + ' ' + space.variable}>
-      <head><script dangerouslySetInnerHTML={{ __html: "try{var t=localStorage.getItem('azmach-theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t;else if(matchMedia('(prefers-color-scheme: dark)').matches)document.documentElement.dataset.theme='dark';}catch(e){}" }} /></head>
+    <html lang="en" data-theme="light" suppressHydrationWarning className={inter.variable + ' ' + space.variable}>
+      <head><script dangerouslySetInnerHTML={{ __html: "try{var t=localStorage.getItem('azmach-theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t;}catch(e){}" }} /></head>
       <body>{children}<SmoothScroll /><RevealEffects /></body>
     </html>
   );

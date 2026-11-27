@@ -94,3 +94,17 @@ test('shared blur reveal fades out and returns in both scroll directions', async
   await expect(group).toHaveAttribute('data-reveal-state', 'visible');
   await expect(group).toHaveCSS('opacity', '1');
 });
+
+test('theme defaults to light even on a dark system and remembers manual selection', async ({ page }) => {
+  await page.emulateMedia({ colorScheme: 'dark', reducedMotion: 'reduce' });
+  await page.goto('/');
+  const root = page.locator('html');
+  const toggle = page.getByRole('button', { name: 'Dark mode' });
+  await expect(root).toHaveAttribute('data-theme', 'light');
+  await expect(toggle).toHaveAttribute('aria-pressed', 'false');
+  await toggle.click();
+  await expect(root).toHaveAttribute('data-theme', 'dark');
+  await page.reload();
+  await expect(root).toHaveAttribute('data-theme', 'dark');
+  await expect(toggle).toHaveAttribute('aria-pressed', 'true');
+});
