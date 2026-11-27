@@ -23,14 +23,17 @@ export default function DesktopNavigation() {
 
   useEffect(() => {
     let frame = 0;
+    const header = nav.current?.closest('header');
+    const hero = document.getElementById('hero-title')?.closest('section');
     const sections = links.slice(1).map(link => ({
       href: link.href,
       element: document.getElementById(link.href.slice(1)),
     }));
     const sync = () => {
       const threshold = window.innerHeight * 0.3;
-      const hero = document.querySelector('[aria-labelledby="hero-title"]');
-      if (window.scrollY <= 2 || (hero && hero.getBoundingClientRect().bottom > threshold)) {
+      const heroBottom = hero?.getBoundingClientRect().bottom ?? 0;
+      if (header) header.toggleAttribute('data-past-hero', heroBottom <= header.offsetHeight);
+      if (window.scrollY <= 2 || heroBottom > threshold) {
         setActive('#top');
         return;
       }
