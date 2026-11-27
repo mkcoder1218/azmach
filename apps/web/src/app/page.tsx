@@ -352,21 +352,24 @@ export default function HomePage() {
           </div>
         </section>
         <section id="contact" className={styles.about} aria-labelledby="contact-title">
+          <style>{"\n.az-contact-label { display:flex; align-items:center; gap:.8rem; }\n.az-contact-icon { display:grid; place-items:center; width:44px; height:44px; border:1px solid var(--line); border-radius:8px; background:var(--surface); color:var(--accent); }\n.az-contact-icon svg { width:21px; height:21px; }\n.az-contact-value { display:block; }\n.az-contact-action { display:inline-flex; align-items:center; justify-self:start; gap:.75rem; font-size:.8rem; font-weight:600; color:var(--foreground); }\n.az-contact-arrow { display:grid; place-items:center; width:30px; height:30px; font-size:1rem; border:1px solid var(--line); border-radius:50%; color:var(--accent); }\n.az-contact-link:hover .az-contact-arrow,.az-contact-link:focus-visible .az-contact-arrow { background:var(--accent); border-color:var(--accent); color:var(--button-ink); }\n.az-contact-link:hover .az-contact-icon,.az-contact-link:focus-visible .az-contact-icon { border-color:var(--accent); }\n.az-contact-link:focus-visible .az-contact-value { color:var(--accent); }\n@media(prefers-reduced-motion:no-preference) {\n.az-contact-icon,.az-contact-arrow { transition:background-color .3s,color .3s,border-color .3s,transform .4s cubic-bezier(.22,1,.36,1); }\n.az-contact-link:hover .az-contact-icon { transform:translateY(-3px); }\n}\n"}</style>
           <p className={styles.sectionIndex}>Contact / Demo</p>
           <div><h2 id="contact-title">Let’s build something.</h2><p>Have a project in mind, a question, or an idea worth exploring? Get in touch to discuss your next step or request a demo.</p></div>
           <div className="az-contact-links">
             <article data-card={0}>
               <a className="az-contact-link" href="mailto:yetsadkanasefa@gmail.com">
-                <span className="az-contact-label">Email us</span>
-                <span className="az-contact-value">yetsadkanasefa@gmail.com <span className="az-contact-arrow" aria-hidden="true">↗</span></span>
+                <span className="az-contact-label"><span className="az-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>Email us</span>
+                <span className="az-contact-value">yetsadkanasefa@gmail.com </span>
                 <span className="az-contact-note">Tell us about your project or send an inquiry.</span>
+                <span className="az-contact-action">Send an email<span className="az-contact-arrow" aria-hidden="true">↗</span></span>
               </a>
             </article>
             <article data-card={1}>
               <a className="az-contact-link" href="tel:+251941098721">
-                <span className="az-contact-label">Call us</span>
-                <span className="az-contact-value">+251 941 098 721 <span className="az-contact-arrow" aria-hidden="true">↗</span></span>
+                <span className="az-contact-label"><span className="az-contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M7 3H4a1 1 0 0 0-1 1c0 9.4 7.6 17 17 17a1 1 0 0 0 1-1v-3l-5-2-2 2a14 14 0 0 1-7-7l2-2-2-5Z"/></svg></span>Call us</span>
+                <span className="az-contact-value">+251 941 098 721 </span>
                 <span className="az-contact-note">Start a conversation directly by phone.</span>
+                <span className="az-contact-action">Start a call<span className="az-contact-arrow" aria-hidden="true">↗</span></span>
               </a>
             </article>
           </div>
