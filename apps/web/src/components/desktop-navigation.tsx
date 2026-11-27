@@ -29,6 +29,11 @@ export default function DesktopNavigation() {
     }));
     const sync = () => {
       const threshold = window.innerHeight * 0.3;
+      const hero = document.querySelector('[aria-labelledby="hero-title"]');
+      if (window.scrollY <= 2 || (hero && hero.getBoundingClientRect().bottom > threshold)) {
+        setActive('#top');
+        return;
+      }
       let current: string = '#top';
       for (const section of sections) {
         if (section.element && section.element.getBoundingClientRect().top <= threshold) {
@@ -43,13 +48,22 @@ export default function DesktopNavigation() {
       frame = requestAnimationFrame(sync);
     };
     sync();
-    window.addEventListener('scroll', schedule, { passive: true });
+    const onScroll = () => {
+      setHovered(null);
+      setFocused(null);
+      schedule();
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    const layoutObserver = new ResizeObserver(schedule);
+    const main = document.querySelector('main');
+    if (main) layoutObserver.observe(main);
     window.addEventListener('resize', schedule);
     window.addEventListener('hashchange', schedule);
     window.addEventListener('pageshow', schedule);
     return () => {
       cancelAnimationFrame(frame);
-      window.removeEventListener('scroll', schedule);
+      window.removeEventListener('scroll', onScroll);
+      layoutObserver.disconnect();
       window.removeEventListener('resize', schedule);
       window.removeEventListener('hashchange', schedule);
       window.removeEventListener('pageshow', schedule);
@@ -99,14 +113,14 @@ export default function DesktopNavigation() {
 
   return (
     <nav ref={nav} className={styles.nav} aria-label="Main navigation"
-      onPointerLeave={() => setHovered(null)}
+      onPointerLeave={() => { setHovered(null); setFocused(null); }}
       onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) setFocused(null); }}>
       <span ref={indicator} className={styles.indicator} aria-hidden="true" />
       {links.map(link => (
         <a key={link.href} href={link.href}
           aria-current={active === link.href ? 'location' : undefined}
           data-highlighted={target === link.href}
-          onPointerEnter={event => { if (event.pointerType !== 'touch') setHovered(link.href); }}
+          onPointerEnter={event => { if (event.pointerType !== 'touch') { setFocused(null); setHovered(link.href); } }}
           onFocus={event => { if (event.currentTarget.matches(':focus-visible')) setFocused(link.href); }}
           onClick={event => { setFocused(null); if (event.detail !== 0) setHovered(null); }}>
           {link.label}

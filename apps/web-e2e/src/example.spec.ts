@@ -46,4 +46,5 @@ test('active navigation follows the visible section rather than a stale hash', a
   await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
   await expect(nav.getByRole('link', { name: 'Home' })).toHaveAttribute('aria-current', 'location');
   await expect(nav.getByRole('link', { name: 'Our Works' })).not.toHaveAttribute('aria-current', 'location');
+  await expect(nav.getByRole('link', { name: 'Home' })).toHaveAttribute('data-highlighted', 'true');
 });
