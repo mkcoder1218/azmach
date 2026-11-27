@@ -52,7 +52,43 @@ const projects = [
   }
 ];
 
+const faqItems = [
+  [
+    "What does AZMACH.E build?",
+    "We design and develop websites, web and mobile applications, business software, real-time platforms and custom digital experiences."
+  ],
+  [
+    "Can you build a custom solution for my business?",
+    "Yes. We start by understanding your workflows, goals and constraints, then define a solution around your actual requirements."
+  ],
+  [
+    "Can you improve an existing website or application?",
+    "Yes. We can assess an existing product, identify usability, performance or architectural issues, and plan targeted improvements."
+  ],
+  [
+    "How does a project begin?",
+    "Start with an email or phone call. We discuss the problem, intended users, scope and priorities before agreeing on the next steps."
+  ],
+  [
+    "How much does a project cost?",
+    "Pricing depends on scope, complexity, integrations and delivery requirements. Contact us to discuss your project and request an estimate."
+  ],
+  [
+    "How long does development take?",
+    "Timelines depend on the requirements and complexity. We discuss milestones and expected delivery dates during project planning."
+  ],
+  [
+    "Do you offer support after launch?",
+    "Ongoing maintenance, updates and technical support can be discussed as part of the project agreement."
+  ],
+  [
+    "Can we work together remotely?",
+    "Yes. Project discussions, reviews and collaboration can be arranged remotely, with communication and milestones agreed at the beginning."
+  ]
+];
+
 export default function HomePage() {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [preview, setPreview] = useState<(typeof projects)[number] | null>(null);
   const previewDialog = useRef<HTMLDialogElement>(null);
   const workStage = useRef<HTMLDivElement>(null);
@@ -93,6 +129,7 @@ export default function HomePage() {
   return (
     <div className={styles.shell} id="top">
       <style>{"\n@media (prefers-reduced-motion: no-preference) {\n  .work-choice { transition: color .35s ease, transform .45s cubic-bezier(.22,1,.36,1); }\n  .work-choice:hover { transform: translateX(4px); }\n  .work-choice:active { transform: translateX(4px) scale(.985); }\n  .work-arrow { transition: background .35s ease, color .35s ease, border-color .35s ease, transform .5s cubic-bezier(.22,1,.36,1); }\n  .work-choice[aria-pressed=\"true\"] .work-arrow { transform: rotate(-45deg); }\n  .work-details { transition: grid-template-rows .5s cubic-bezier(.22,1,.36,1), opacity .38s ease, filter .5s ease, transform .5s cubic-bezier(.22,1,.36,1), visibility .5s; }\n  .work-frame { animation: work-sharp .75s cubic-bezier(.22,1,.36,1) both; }\n  .work-address { animation: work-sharp .45s cubic-bezier(.22,1,.36,1) both; }\n  @keyframes work-sharp { from { opacity: 0; filter: blur(12px); transform: translateY(9px) scale(.985); } to { opacity: 1; filter: blur(0); transform: none; } }\n  .work-loading { animation: work-pulse 1.4s ease-in-out infinite alternate; }\n  @keyframes work-pulse { from { opacity: .45; } to { opacity: 1; } }\n}\n"}</style>
+      <style>{"\n.az-faq-list { grid-column:1/-1; border-top:1px solid var(--line); margin-top:clamp(1rem,3vw,2rem); }\n.az-faq-row { border-bottom:1px solid var(--line); }\n.az-faq-button { display:grid; grid-template-columns:2.5rem minmax(0,1fr) 2.5rem; gap:clamp(.7rem,2vw,2rem); align-items:center; width:100%; text-align:left; background:transparent; color:var(--foreground); border:0; cursor:pointer; padding:clamp(1rem,2vw,1.65rem) 0; font:inherit; }\n.az-faq-button:hover,.az-faq-button[aria-expanded=\"true\"] { color:var(--accent); }\n.az-faq-number { font-size:.72rem; color:var(--muted); letter-spacing:.1em; }\n.az-faq-title { font-family:var(--font-space),sans-serif; font-size:clamp(1.2rem,2.3vw,1.85rem); font-weight:600; letter-spacing:-.035em; line-height:1.25; }\n.az-faq-icon { display:grid; place-items:center; width:2.5rem; height:2.5rem; border:1px solid var(--line); border-radius:50%; position:relative; }\n.az-faq-icon::before,.az-faq-icon::after { content:''; width:12px; height:1px; background:currentColor; position:absolute; }\n.az-faq-icon::after { transform:rotate(90deg); }\n.az-faq-button[aria-expanded=\"true\"] .az-faq-icon { background:var(--accent); color:white; border-color:var(--accent); }\n.az-faq-button[aria-expanded=\"true\"] .az-faq-icon::after { transform:rotate(0deg); }\n.az-faq-answer { display:grid; grid-template-rows:0fr; opacity:0; visibility:hidden; filter:blur(5px); }\n.az-faq-answer[data-open=\"true\"] { grid-template-rows:1fr; opacity:1; visibility:visible; filter:none; }\n.az-faq-answer > div { overflow:hidden; min-height:0; }\n#faqs .az-faq-answer p { margin:0 0 1.5rem; padding-left:calc(2.5rem + clamp(.7rem,2vw,2rem)); max-width:54rem; font-size:1rem; }\n.az-contact-links { grid-column:1/-1; display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr)); gap:clamp(1.5rem,4vw,4rem); margin-top:clamp(1rem,3vw,2rem); }\n.az-contact-link { display:grid; gap:.85rem; border-block:1px solid var(--line); padding:clamp(1.5rem,3vw,2.5rem) 0; min-width:0; color:var(--foreground); text-decoration:none; }\n.az-contact-label { font-size:.72rem; text-transform:uppercase; letter-spacing:.13em; color:var(--accent); font-weight:600; }\n.az-contact-value { display:flex; align-items:center; justify-content:space-between; gap:1rem; font-family:var(--font-space),sans-serif; font-size:clamp(1.35rem,2.4vw,2.2rem); letter-spacing:-.045em; font-weight:600; overflow-wrap:anywhere; }\n.az-contact-link:hover .az-contact-value { color:var(--accent); }\n.az-contact-arrow { flex:none; font-size:1.5rem; }\n.az-contact-note { font-size:.9rem; color:var(--muted); line-height:1.6; }\n@media(prefers-reduced-motion:no-preference) {\n.az-faq-button,.az-contact-value { transition:color .3s ease; }\n.az-faq-icon,.az-faq-icon::after,.az-contact-arrow { transition:transform .45s cubic-bezier(.22,1,.36,1),background-color .3s,color .3s; }\n.az-faq-answer { transition:grid-template-rows .5s cubic-bezier(.22,1,.36,1),opacity .4s,filter .5s,visibility .5s; }\n.az-contact-link:hover .az-contact-arrow { transform:translate(4px,-4px); }\n}\n"}</style>
       <style>{"\n.principle-manifesto { background: transparent; color: var(--foreground); padding: clamp(4rem,9vw,8rem) var(--gutter); border-block: 1px solid var(--line); overflow: hidden; }\n.principle-intro { display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; align-items: start; margin-bottom: clamp(2rem,5vw,4rem); }\n.principle-intro h2 { font-family: var(--font-space),sans-serif; font-size: clamp(2rem,5vw,4.5rem); font-weight: 600; letter-spacing: -.065em; line-height: 1.05; }\n.principle-intro p { color: var(--muted); margin-top: 1rem; line-height: 1.6; }\n.principle-line { position: relative; display: grid; grid-template-columns: 3rem minmax(0,1fr) minmax(0,.65fr) 56px; align-items: center; gap: clamp(.75rem,3vw,3rem); padding: clamp(1rem,2vw,1.75rem) 0; border-top: 1px solid var(--line); }\n.principle-line:last-child { border-bottom: 1px solid var(--line); }\n.principle-line h3 { font-family: var(--font-space),sans-serif; font-size: clamp(2rem,4.5vw,4.5rem); font-weight: 600; letter-spacing: -.075em; line-height: .95; }\n.principle-line p { color: var(--muted); font-size: clamp(.9rem,1.4vw,1.15rem); line-height: 1.65; max-width: 24rem; }\n.principle-number { color: var(--accent); font-size: .72rem; letter-spacing: .13em; }\n.principle-icon { width: 100%; color: var(--foreground); }\n.principle-line::before { content: ''; position: absolute; inset: 0 auto auto 0; height: 1px; width: 100%; background: var(--accent); transform-origin: left; transform: scaleX(0); }\n@media(prefers-reduced-motion:no-preference) {\n  .principle-line::before { transition: transform .9s cubic-bezier(.22,1,.36,1); }\n  .principle-line[data-reveal-state=\"visible\"]::before { transform: scaleX(.065); }\n  .principle-line h3,.principle-icon { transition: transform .55s cubic-bezier(.22,1,.36,1),color .35s; }\n  .principle-line:hover h3 { transform: translateX(12px); color: var(--accent); }\n  .principle-line:hover .principle-icon { transform: rotate(-12deg) scale(1.1); color: var(--accent); }\n  .principle-line .principle-trace { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.3s cubic-bezier(.22,1,.36,1); }\n  .principle-line[data-reveal-state=\"visible\"] .principle-trace { stroke-dashoffset: 0; }\n}\n@media(max-width:700px) { .principle-intro { grid-template-columns: 1fr; gap: 1rem; } .principle-line { grid-template-columns: 1.8rem minmax(0,1fr) 48px; gap: .65rem; } .principle-line p { grid-column: 2 / 3; grid-row: 2; } .principle-icon { grid-column: 3; grid-row: 1 / 3; } }\n@media(prefers-reduced-motion:reduce) { .principle-line::before { transform: scaleX(.065); } }\n"}</style>
       <style>{"\n.about-story { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,340px),1fr)); gap: clamp(2rem,5vw,6rem); align-items: center; margin-top: 1rem; }\n.about-visual { position: relative; overflow: hidden; background: #e8e5df; aspect-ratio: 5 / 3; color: #171717; display: grid; align-items: end; padding: clamp(1rem,3vw,2.5rem); isolation: isolate; }\n.about-visual svg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; }\n.about-statement { font-family: var(--font-space),sans-serif; font-size: clamp(2rem,4vw,4.2rem); font-weight: 600; line-height: .98; letter-spacing: -.07em; }\n.about-values { grid-column: 1 / -1; margin-top: clamp(1rem,3vw,3rem); border-top: 1px solid var(--line); }\n.about-value { display: grid; grid-template-columns: minmax(85px,.65fr) minmax(0,1.1fr) minmax(0,1.4fr); gap: clamp(1rem,3vw,3rem); align-items: center; padding: clamp(1.5rem,3vw,2.75rem) 0; border-bottom: 1px solid var(--line); }\n.about-value h3 { font-family: var(--font-space),sans-serif; font-size: clamp(1.4rem,2.7vw,2.6rem); font-weight: 600; letter-spacing: -.055em; line-height: 1.12; }\n#about .about-value p { margin: 0; font-size: 1rem; line-height: 1.65; }\n.about-kicker { color: var(--accent); font-size: .69rem; font-weight: 600; letter-spacing: .13em; text-transform: uppercase; }\n@media(max-width:700px) { .about-value { grid-template-columns: 1fr; gap: .7rem; } }\n@media(prefers-reduced-motion:no-preference) {\n  .about-visual .about-trace { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.7s cubic-bezier(.22,1,.36,1); }\n  .about-visual[data-reveal-state=\"visible\"] .about-trace { stroke-dashoffset: 0; }\n  .about-visual .about-orbit { transform-box: fill-box; transform-origin: center; transition: transform 1.5s cubic-bezier(.22,1,.36,1), opacity 1.2s; transform: rotate(-18deg) scale(.8); opacity: 0; }\n  .about-visual[data-reveal-state=\"visible\"] .about-orbit { transform: none; opacity: 1; }\n  .about-value { transition: background-color .35s ease; }\n  .about-value:hover { background-color: #eae7e2; }\n\n  .about-value:hover h3 { color: var(--accent); }\n}\n"}</style>
       <a className={styles.skip} href="#main">Skip to content</a>
@@ -260,13 +297,44 @@ export default function HomePage() {
         </section>
         <section id="faqs" className={styles.about} aria-labelledby="faq-title">
           <p className={styles.sectionIndex}>FAQs</p>
-          <div><h2 id="faq-title">Common questions.</h2>
-            <details className={styles.question}><summary>What does AZMACH.E build?</summary><p>Websites, applications and digital software experiences.</p></details>
+          <div><h2 id="faq-title">Common questions.</h2><p>Everything you need to know before starting a conversation with us.</p></div>
+          <div className="az-faq-list">
+            {faqItems.map(([question, answer], index) => {
+              const active = openFaq === index;
+              return (
+                <article className="az-faq-row" key={question} data-card={index % 4}>
+                  <button type="button" className="az-faq-button" id={'faq-question-' + index} aria-expanded={active} aria-controls={'faq-answer-' + index} onClick={() => setOpenFaq(active ? null : index)}>
+                    <span className="az-faq-number">{String(index + 1).padStart(2, '0')} /</span>
+                    <span className="az-faq-title">{question}</span>
+                    <span aria-hidden="true" className="az-faq-icon" />
+                  </button>
+                  <div className="az-faq-answer" id={'faq-answer-' + index} aria-labelledby={'faq-question-' + index} aria-hidden={!active} data-open={active}>
+                    <div><p>{answer}</p></div>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </section>
         <section id="contact" className={styles.about} aria-labelledby="contact-title">
           <p className={styles.sectionIndex}>Contact / Demo</p>
-          <div><h2 id="contact-title">Let’s build something.</h2><p>Contact and demo booking details will be available here soon.</p></div>
+          <div><h2 id="contact-title">Let’s build something.</h2><p>Have a project in mind, a question, or an idea worth exploring? Get in touch to discuss your next step or request a demo.</p></div>
+          <div className="az-contact-links">
+            <article data-card={0}>
+              <a className="az-contact-link" href="mailto:codemk1218@gmail.com">
+                <span className="az-contact-label">01 / Email us</span>
+                <span className="az-contact-value">codemk1218@gmail.com <span className="az-contact-arrow" aria-hidden="true">↗</span></span>
+                <span className="az-contact-note">Tell us about your project or send an inquiry.</span>
+              </a>
+            </article>
+            <article data-card={1}>
+              <a className="az-contact-link" href="tel:+251933894492">
+                <span className="az-contact-label">02 / Call us</span>
+                <span className="az-contact-value">+251 933 894 492 <span className="az-contact-arrow" aria-hidden="true">↗</span></span>
+                <span className="az-contact-note">Start a conversation directly by phone.</span>
+              </a>
+            </article>
+          </div>
         </section>
       </main>
       <dialog ref={previewDialog} aria-label={preview ? preview.title + ' live preview' : 'Live website preview'} onCancel={(event) => { event.preventDefault(); setPreview(null); }} onClick={(event) => { if (event.target === event.currentTarget) setPreview(null); }} style={{ position: 'fixed', inset: 0, margin: 'auto', width: 'min(96vw, 1440px)', maxWidth: '96vw', maxHeight: '92dvh', padding: 0, border: '1px solid var(--line)', background: '#faf9f7', color: 'var(--foreground)', boxShadow: '0 0 0 100vmax #0009, 0 24px 80px #0005' }}>
