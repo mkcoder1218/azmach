@@ -15,6 +15,7 @@ const links = [
 export default function DesktopNavigation() {
   const nav = useRef<HTMLElement>(null);
   const indicator = useRef<HTMLSpanElement>(null);
+  const targetRef = useRef('#top');
   const [active, setActive] = useState('#top');
   const [hovered, setHovered] = useState<string | null>(null);
   const [focused, setFocused] = useState<string | null>(null);
@@ -34,27 +35,41 @@ export default function DesktopNavigation() {
     const root = nav.current;
     const bar = indicator.current;
     if (!root || !bar) return;
+    // Observe layout once, not on every hover: the initial ResizeObserver
+    // notification previously snapped the indicator to its destination.
+    let previousWidth = root.clientWidth;
+    const observer = new ResizeObserver(() => {
+      const width = root.clientWidth;
+      if (width === previousWidth) return;
+      previousWidth = width;
+      const link = Array.from(root.querySelectorAll('a')).find(item => item.hash === targetRef.current);
+      if (!width || !link) return;
+      gsap.set(bar, { x: link.offsetLeft, y: link.offsetTop, width: link.offsetWidth, height: link.offsetHeight, opacity: 1, overwrite: true });
+      bar.dataset.ready = 'true';
+    });
+    observer.observe(root);
+    return () => { observer.disconnect(); gsap.killTweensOf(bar); };
+  }, []);
+
+  useEffect(() => {
+    targetRef.current = target;
+    const root = nav.current;
+    const bar = indicator.current;
+    if (!root || !bar || !root.clientWidth) return;
     const link = Array.from(root.querySelectorAll('a')).find(item => item.hash === target);
     if (!link) return;
-    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const move = (animate: boolean) => {
-      if (!root.clientWidth) return;
-      const x = link.offsetLeft;
-      const width = link.offsetWidth;
-      const y = link.offsetTop;
-      const height = link.offsetHeight;
-      gsap.to(bar, {
-        x, y, width, height, opacity: 1,
-        duration: animate && !media.matches && bar.dataset.ready ? 0.42 : 0,
-        ease: 'power3.out', overwrite: 'auto',
-      });
-      bar.dataset.ready = 'true';
-    };
-    move(true);
-    const observer = new ResizeObserver(() => move(false));
-    observer.observe(root);
-    observer.observe(link);
-    return () => { observer.disconnect(); gsap.killTweensOf(bar); };
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    gsap.to(bar, {
+      x: link.offsetLeft,
+      y: link.offsetTop,
+      width: link.offsetWidth,
+      height: link.offsetHeight,
+      opacity: 1,
+      duration: !reduced && bar.dataset.ready ? 0.48 : 0,
+      ease: 'power3.inOut',
+      overwrite: 'auto',
+    });
+    bar.dataset.ready = 'true';
   }, [target]);
 
   return (
