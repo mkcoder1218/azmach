@@ -327,3 +327,34 @@
   .aboutStory { grid-template-columns: minmax(0, 1fr); }
   .aboutStory h2 { max-width: none; }
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  .founder {
+    overflow: clip;
+  }
+
+  .founder > [aria-hidden="true"] {
+    transform-origin: right center;
+    transition: scale .95s cubic-bezier(.22, 1, .36, 1);
+  }
+
+  .founder:has(> [data-reveal-state="hidden"]):not(:has(> [data-reveal-state="visible"])) > [aria-hidden="true"] {
+    scale: 1.045;
+  }
+
+  .founderQuote {
+    --reveal-delay: 130ms;
+  }
+
+  .founderQuote[data-reveal-state] > * {
+    transition: translate .7s cubic-bezier(.22, 1, .36, 1);
+  }
+
+  .founderQuote[data-reveal-state="hidden"] > * {
+    translate: 0 1rem;
+  }
+
+  .founderQuote[data-reveal-state="visible"] figcaption {
+    transition-delay: .18s;
+  }
+}
