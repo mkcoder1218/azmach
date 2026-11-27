@@ -13,6 +13,7 @@ test('homepage presents the AZMACH.E identity', async ({ page }) => {
 test('mobile homepage has no horizontal overflow', async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
   await page.goto('/');
-  await expect(page.getByRole('navigation')).toBeVisible();
+  await page.getByText('Menu', { exact: false }).first().click();
+  await expect(page.getByRole('navigation', { name: 'Mobile navigation' })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
 });

@@ -14,10 +14,24 @@ export default function HomePage() {
       <header className={styles.header}>
         <a className={styles.brand} href="#top" aria-label="AZMACH.E home">AZMACH<span>.E</span></a>
         <nav className={styles.nav} aria-label="Main navigation">
-          <a href="#about">About</a>
-          <a href="#principles">Principles</a>
+          <a href="#top" className={styles.homeLink}>Home</a>
+          <a href="#services">Services</a>
+          <a href="#work">Our Works</a>
+          <a href="#about">About Us</a>
+          <a href="#contact">Contact</a>
         </nav>
-        <span className={styles.index}>ETH / 251</span>
+        <div className={styles.actions}>
+          <a className={styles.faqLink} href="#faqs">FAQs</a>
+          <a className={styles.demoLink} href="#contact">Request a Demo <span aria-hidden="true">↗</span></a>
+        </div>
+        <details className={styles.mobileMenu}>
+          <summary>Menu <span aria-hidden="true">☰</span></summary>
+          <nav aria-label="Mobile navigation">
+            <a href="#top">Home</a><a href="#services">Services</a><a href="#work">Our Works</a>
+            <a href="#about">About Us</a><a href="#contact">Contact</a><a href="#faqs">FAQs</a>
+            <a className={styles.demoLink} href="#contact">Request a Demo ↗</a>
+          </nav>
+        </details>
       </header>
       <main id="main">
         <section className={styles.hero} aria-labelledby="hero-title">
@@ -39,6 +53,18 @@ export default function HomePage() {
           </div>
           <div className={styles.heroFoot}><span>DESIGN / ENGINEERING / IMPACT</span><span>SCROLL TO EXPLORE ↓</span></div>
         </section>
+        <section id="services" className={styles.principles} aria-labelledby="services-title">
+          <h2 id="services-title" className={styles.sectionIndex}>Services</h2>
+          <div className={styles.cards}>
+            {['Web development', 'Mobile applications', 'Software engineering', 'Digital experiences'].map((service) => (
+              <article key={service} className={styles.card}><h3>{service}</h3></article>
+            ))}
+          </div>
+        </section>
+        <section id="work" className={styles.about} aria-labelledby="work-title">
+          <p className={styles.sectionIndex}>Our Works</p>
+          <div><h2 id="work-title">Selected work.</h2><p>Project case studies will be published here.</p></div>
+        </section>
         <section id="about" className={styles.about} aria-labelledby="about-title">
           <p className={styles.sectionIndex}>01 / About</p>
           <div><h2 id="about-title">Built with purpose.</h2><p>AZMACH.E is a personal space for software engineering, thoughtful design and the pursuit of meaningful progress.</p></div>
@@ -52,6 +78,16 @@ export default function HomePage() {
               </article>
             ))}
           </div>
+        </section>
+        <section id="faqs" className={styles.about} aria-labelledby="faq-title">
+          <p className={styles.sectionIndex}>FAQs</p>
+          <div><h2 id="faq-title">Common questions.</h2>
+            <details className={styles.question}><summary>What does AZMACH.E build?</summary><p>Websites, applications and digital software experiences.</p></details>
+          </div>
+        </section>
+        <section id="contact" className={styles.about} aria-labelledby="contact-title">
+          <p className={styles.sectionIndex}>Contact / Demo</p>
+          <div><h2 id="contact-title">Let’s build something.</h2><p>Contact and demo booking details will be available here soon.</p></div>
         </section>
       </main>
       <footer className={styles.footer}><span>AZMACH.E — Ethiopian roots. Global ambition.</span><a href="#top">Back to top ↑</a></footer>
