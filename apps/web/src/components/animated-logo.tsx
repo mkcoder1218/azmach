@@ -48,6 +48,7 @@ export default function AnimatedLogo() {
     const media = gsap.matchMedia();
     media.add('(prefers-reduced-motion: no-preference)', () => {
       const timeline = gsap.timeline({ defaults: { ease: 'power3.out' } });
+      timeline.timeScale(1.25);
       const parts = Array.from(svg.querySelectorAll<SVGElement>('[data-mark], [data-letter]'));
       const animated = parts.flatMap(part =>
         part.hasAttribute('data-mark')
