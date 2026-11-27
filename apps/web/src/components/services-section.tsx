@@ -47,31 +47,52 @@ export default function ServicesSection() {
     media.add('(prefers-reduced-motion: no-preference)', () => {
       const nodes = Array.from(root.querySelectorAll<HTMLElement>('[data-card]'));
       const drawings = Array.from(root.querySelectorAll<SVGGeometryElement>('svg path, svg rect, svg circle'));
-      const timelines = new Set<gsap.core.Timeline>();
+      const timelines = new Map<Element, gsap.core.Timeline>();
+
+      // Keep one reusable drawing timeline per card, with an explicit reset
+      // whenever it leaves the same viewport region as the global reveal.
+      for (const node of nodes) {
+        const delay = Number(node.dataset.card ?? 0) * .075;
+        const shapes = Array.from(node.querySelectorAll<SVGGeometryElement>('svg path, svg rect, svg circle'));
+        const timeline = gsap.timeline({ paused: true, delay: delay + .28 });
+        timelines.set(node, timeline);
+
+        shapes.forEach((shape, index) => {
+          const length = Math.max(1, shape.getTotalLength());
+          gsap.set(shape, { strokeDasharray: length + ' ' + length, strokeDashoffset: length });
+          timeline.to(shape, {
+            strokeDashoffset: 0, duration: .72, ease: 'power2.inOut',
+          }, index * .105);
+
+          if (shape.classList.contains(styles.red)) {
+            gsap.set(shape, { fillOpacity: 0 });
+            timeline.to(shape, {
+              fillOpacity: .19, duration: .35, ease: 'power2.out',
+            }, index * .105 + .65);
+          }
+        });
+        timeline.eventCallback('onComplete', () => {
+          gsap.set(shapes, { clearProps: 'strokeDasharray,strokeDashoffset,fillOpacity' });
+        });
+      }
+
       const observer = new IntersectionObserver(entries => {
         for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
-          observer.unobserve(entry.target);
-          const delay = entry.target.hasAttribute('data-card') ? Number(entry.target.getAttribute('data-card')) * .075 : 0;
-          const shapes = Array.from(entry.target.querySelectorAll<SVGGeometryElement>('svg path, svg rect, svg circle'));
-          if (shapes.length) {
-            const timeline = gsap.timeline({ delay: delay + .28 });
-            timelines.add(timeline);
-            shapes.forEach((shape, index) => {
+          const timeline = timelines.get(entry.target);
+          if (!timeline) continue;
+          if (entry.isIntersecting) {
+            timeline.restart(true);
+          } else {
+            timeline.pause(0, true);
+            // Restore the undrawn state even after completion cleared inline styles.
+            for (const shape of entry.target.querySelectorAll<SVGGeometryElement>('svg path, svg rect, svg circle')) {
               const length = Math.max(1, shape.getTotalLength());
-              timeline.fromTo(shape, { strokeDasharray: length + ' ' + length, strokeDashoffset: length }, {
-                strokeDashoffset: 0, duration: .72, ease: 'power2.inOut',
-                clearProps: 'strokeDasharray,strokeDashoffset',
-              }, index * .105);
-              if (shape.classList.contains(styles.red)) {
-                timeline.fromTo(shape, { fillOpacity: 0 }, {
-                  fillOpacity: .19, duration: .35, ease: 'power2.out', clearProps: 'fillOpacity',
-                }, index * .105 + .65);
-              }
-            });
+              gsap.set(shape, { strokeDasharray: length + ' ' + length, strokeDashoffset: length });
+              if (shape.classList.contains(styles.red)) gsap.set(shape, { fillOpacity: 0 });
+            }
           }
         }
-      }, { threshold: .12 });
+      }, { threshold: 0, rootMargin: '-8% 0px -8% 0px' });
       nodes.forEach(node => observer.observe(node));
       return () => {
         observer.disconnect();
