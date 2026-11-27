@@ -32,7 +32,7 @@ export default function DesktopNavigation() {
     const sync = () => {
       const threshold = window.innerHeight * 0.3;
       const heroBottom = hero?.getBoundingClientRect().bottom ?? 0;
-      if (header) header.toggleAttribute('data-past-hero', heroBottom <= header.offsetHeight);
+      if (header) header.toggleAttribute('data-scrolled', window.scrollY > 0);
       if (window.scrollY <= 2 || heroBottom > threshold) {
         setActive('#top');
         return;

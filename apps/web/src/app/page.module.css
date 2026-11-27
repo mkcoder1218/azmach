@@ -8,7 +8,7 @@
   background: transparent;
   position: sticky; top: 0; z-index: 50;
 }
-.header[data-past-hero] { background: var(--surface); }
+.header[data-scrolled] { background: var(--surface); }
 @media (prefers-reduced-motion: no-preference) {
   .header { transition: background-color .2s ease; }
 }
