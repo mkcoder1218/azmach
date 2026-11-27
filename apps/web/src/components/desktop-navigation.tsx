@@ -22,13 +22,38 @@ export default function DesktopNavigation() {
   const target = hovered ?? focused ?? active;
 
   useEffect(() => {
+    let frame = 0;
+    const sections = links.slice(1).map(link => ({
+      href: link.href,
+      element: document.getElementById(link.href.slice(1)),
+    }));
     const sync = () => {
-      const hash = window.location.hash || '#top';
-      setActive(links.some(link => link.href === hash) ? hash : '#top');
+      const threshold = window.innerHeight * 0.3;
+      let current: string = '#top';
+      for (const section of sections) {
+        if (section.element && section.element.getBoundingClientRect().top <= threshold) {
+          current = section.href;
+        }
+      }
+      if (window.scrollY > 0 && window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2) current = '#contact';
+      setActive(current);
+    };
+    const schedule = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(sync);
     };
     sync();
-    window.addEventListener('hashchange', sync);
-    return () => window.removeEventListener('hashchange', sync);
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    window.addEventListener('hashchange', schedule);
+    window.addEventListener('pageshow', schedule);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', schedule);
+      window.removeEventListener('resize', schedule);
+      window.removeEventListener('hashchange', schedule);
+      window.removeEventListener('pageshow', schedule);
+    };
   }, []);
 
   useEffect(() => {
@@ -82,8 +107,8 @@ export default function DesktopNavigation() {
           aria-current={active === link.href ? 'location' : undefined}
           data-highlighted={target === link.href}
           onPointerEnter={event => { if (event.pointerType !== 'touch') setHovered(link.href); }}
-          onFocus={() => setFocused(link.href)}
-          onClick={() => setActive(link.href)}>
+          onFocus={event => { if (event.currentTarget.matches(':focus-visible')) setFocused(link.href); }}
+          onClick={event => { setFocused(null); if (event.detail !== 0) setHovered(null); }}>
           {link.label}
         </a>
       ))}

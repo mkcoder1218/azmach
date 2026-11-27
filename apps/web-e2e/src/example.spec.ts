@@ -37,3 +37,13 @@ test('desktop navigation uses one sliding highlight', async ({ page }) => {
   await page.getByRole('heading', { level: 1 }).hover();
   await expect(home).toHaveAttribute('data-highlighted', 'true');
 });
+
+test('active navigation follows the visible section rather than a stale hash', async ({ page }) => {
+  await page.setViewportSize({ width: 1600, height: 900 });
+  await page.goto('/#work');
+  const nav = page.getByRole('navigation', { name: 'Main navigation' });
+  await expect(nav.getByRole('link', { name: 'Our Works' })).toHaveAttribute('aria-current', 'location');
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+  await expect(nav.getByRole('link', { name: 'Home' })).toHaveAttribute('aria-current', 'location');
+  await expect(nav.getByRole('link', { name: 'Our Works' })).not.toHaveAttribute('aria-current', 'location');
+});
