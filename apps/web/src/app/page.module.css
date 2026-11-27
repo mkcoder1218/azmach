@@ -152,7 +152,7 @@
   isolation: isolate;
   overflow: hidden;
   border: 1px solid transparent;
-  border-radius: 2px;
+  border-radius: 8px;
   transition: box-shadow .32s ease, transform .32s cubic-bezier(.22,1,.36,1);
 }
 .faqLink { --sheet-color: #b91c1c; }
