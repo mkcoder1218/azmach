@@ -10,6 +10,13 @@ const principles = [
   { number: '04', title: 'Elevate', description: 'Make every detail matter.' },
 ];
 
+const projects = [
+  { number: '01', title: 'RedSea', category: 'Digital marketplace', description: 'A modern online shopping experience built with Next.js, React and TypeScript.' },
+  { number: '02', title: 'Glam Nest', category: 'Beauty & lifestyle', description: 'A digital experience for a beauty and hair salon, built with React and TypeScript.' },
+  { number: '03', title: 'Little Paris', category: 'Hospitality & dining', description: 'A restaurant website and digital menu experience, built with Next.js and React.' },
+  { number: '04', title: 'Shine Health Care', category: 'Healthcare', description: 'A healthcare web experience built with React, TypeScript and client-side navigation.' },
+];
+
 export default function HomePage() {
   return (
     <div className={styles.shell} id="top">
@@ -53,7 +60,18 @@ export default function HomePage() {
         <ServicesSection />
         <section id="work" className={styles.about} aria-labelledby="work-title">
           <p className={styles.sectionIndex}>Our Works</p>
-          <div><h2 id="work-title">Selected work.</h2><p>Project case studies will be published here.</p></div>
+          <div><h2 id="work-title">Selected work.</h2><p>A selection of digital experiences across commerce, lifestyle, hospitality and healthcare.</p></div>
+          <div style={{ gridColumn: '1 / -1' }}>
+            <div className={styles.cards}>
+              {projects.map((project, index) => (
+                <article key={project.number} className={styles.card} data-card={index}>
+                  <span>{project.number} / {project.category}</span>
+                  <h3>{project.title}</h3>
+                  <div style={{ marginTop: '1rem', color: 'var(--muted)', fontSize: '.95rem', lineHeight: 1.65 }}>{project.description}</div>
+                </article>
+              ))}
+            </div>
+          </div>
         </section>
         <section id="about" className={styles.about} aria-labelledby="about-title">
           <p className={styles.sectionIndex}>01 / About</p>
