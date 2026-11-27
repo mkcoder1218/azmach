@@ -113,8 +113,7 @@ export default function DesktopNavigation() {
 
   return (
     <nav ref={nav} className={styles.nav} aria-label="Main navigation"
-      onPointerLeave={() => { setHovered(null); setFocused(null); }}
-      onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) setFocused(null); }}>
+      onPointerLeave={() => { setHovered(null); setFocused(null); }}>
       <span ref={indicator} className={styles.indicator} aria-hidden="true" />
       {links.map(link => (
         <a key={link.href} href={link.href}
@@ -122,6 +121,7 @@ export default function DesktopNavigation() {
           data-highlighted={target === link.href}
           onPointerEnter={event => { if (event.pointerType !== 'touch') { setFocused(null); setHovered(link.href); } }}
           onFocus={event => { if (event.currentTarget.matches(':focus-visible')) setFocused(link.href); }}
+          onBlur={event => { if (!nav.current?.contains(event.relatedTarget)) setFocused(null); }}
           onClick={event => { setFocused(null); if (event.detail !== 0) setHovered(null); }}>
           {link.label}
         </a>

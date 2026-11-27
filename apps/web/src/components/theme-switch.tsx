@@ -18,10 +18,10 @@ export default function ThemeSwitch() {
     const next = getTheme() === 'dark' ? 'light' : 'dark';
     const apply = () => {
       document.documentElement.dataset.theme = next;
-      try { localStorage.setItem('azmach-theme', next); } catch {}
+      try { localStorage.setItem('azmach-theme', next); } catch { /* Storage can be blocked; the current theme still applies. */ }
       window.dispatchEvent(new Event(eventName));
     };
-    const doc = document as Document & { startViewTransition?: (update: () => void) => unknown };
+    const doc = document;
     if (!matchMedia('(prefers-reduced-motion: reduce)').matches && doc.startViewTransition) {
       doc.startViewTransition(apply);
     } else {

@@ -2,16 +2,28 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "allowJs": true,
+    "lib": [
+      "es2022",
+      "dom",
+      "dom.iterable"
+    ],
+    "rootDir": ".",
     "outDir": "out-tsc/playwright",
     "sourceMap": false,
-    "types": ["node"]
+    "types": [
+      "node"
+    ]
   },
-  "include": ["src/**/*.ts", "src/**/*.js", "playwright.config.mts"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.js",
+    "playwright.config.mts"
+  ],
   "exclude": [
     "out-tsc",
     "test-output",
-    "eslint.config.js",
-    "eslint.config.mjs",
-    "eslint.config.cjs"
+    "test-results",
+    "playwright-report",
+    "node_modules"
   ]
 }

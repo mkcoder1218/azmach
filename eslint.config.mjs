@@ -6,9 +6,18 @@ export default [
     ...nx.configs["flat/javascript"],
     {
       "ignores": [
-        "**/dist",
-        "**/out-tsc",
-        "**/test-output"
+        "**/dist/**",
+        "**/out-tsc/**",
+        "**/test-output/**",
+        "**/.next/**",
+        "**/out/**",
+        "**/.nx/**",
+        "**/playwright-report/**",
+        "**/test-results/**",
+        "**/coverage/**",
+        "**/*.min.js",
+        "**/*.min.mjs",
+        "**/*.min.cjs"
       ]
     },
     {
