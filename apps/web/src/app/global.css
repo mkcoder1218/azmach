@@ -8,6 +8,8 @@
   --muted: #595955;
   --line: #d4d0ca;
   --gutter: clamp(1.25rem, 5vw, 5.5rem);
+  --font-heading: Arial, sans-serif;
+  --font-body: Helvetica, Arial, sans-serif;
 }
 
 html { scroll-behavior: smooth; }
@@ -16,10 +18,16 @@ body {
   margin: 0;
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-inter), Arial, sans-serif;
+  /* Override legacy font tokens for every existing component. */
+  --font-inter: var(--font-body);
+  --font-space: var(--font-heading);
+  font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
 }
-h1, h2 { font-family: var(--font-space), Arial, sans-serif; }
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); }
+p, button, input, textarea, select, summary { font-family: var(--font-body); }
+/* Interactive labels retain Helvetica even in display-sized buttons. */
+button .az-faq-title, button span[style*='font-family'] { font-family: var(--font-body) !important; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
 ::selection { background: var(--accent); color: white; }
 @media (prefers-reduced-motion: reduce) {
