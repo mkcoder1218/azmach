@@ -20,15 +20,13 @@
 .heroMeta, .heroFoot { display: flex; justify-content: space-between; align-items: center; gap: 1rem; color: var(--muted); }
 .heroMeta i { display: inline-block; width: .5rem; height: .5rem; background: var(--accent); margin-right: .55rem; }
 .heroBody { padding-block: clamp(3rem, 10vh, 8rem); }
-.eyebrow { margin-bottom: 1.25rem; color: var(--muted); animation: reveal .65s ease-out both; }
+.eyebrow { margin-bottom: 1.25rem; color: var(--muted); }
 .headline { margin: 0; font-size: clamp(2.7rem, 9.7vw, 10rem); line-height: .95; font-weight: 700; letter-spacing: -.085em; }
-.headline span { display: block; animation: reveal .85s cubic-bezier(.2,.7,.2,1) both; }
+.headline span { display: block; }
 .headline span:first-child { color: var(--accent); }
-.headline span:nth-child(2) { animation-delay: .12s; }
 .heroBottom {
   display: flex; justify-content: space-between; align-items: end; gap: 2rem;
   margin-top: clamp(2rem, 5vw, 4rem); padding-top: 1.5rem; border-top: 1px solid var(--line);
-  animation: reveal .7s .24s ease-out both;
 }
 .heroBottom p { max-width: 32rem; font-size: clamp(1rem, 1.6vw, 1.35rem); line-height: 1.6; color: var(--muted); }
 .cta { display: inline-flex; justify-content: space-between; align-items: center; gap: 2rem; padding: 1rem 1.25rem; background: var(--foreground); color: white; font-size: .85rem; font-weight: 600; transition: background .2s; flex-shrink: 0; }
@@ -45,7 +43,6 @@
 .card h3 { margin-top: 1.6rem; font-family: var(--font-space), sans-serif; font-size: 1.6rem; font-weight: 600; letter-spacing: -.04em; }
 .card p { margin-top: .6rem; color: var(--muted); font-size: .85rem; line-height: 1.6; }
 .footer { display: flex; justify-content: space-between; gap: 1rem; border-top: 1px solid var(--line); padding: 1.5rem var(--gutter); color: var(--muted); font-size: .75rem; }
-@keyframes reveal { from { opacity: 0; filter: blur(9px); transform: translateY(16px); } to { opacity: 1; filter: blur(0); transform: translateY(0); } }
 @media (max-width: 700px) {
   .header { min-height: 66px; }
   .index, .heroMeta > span:last-child { display: none; }
@@ -59,7 +56,6 @@
   .footer { flex-wrap: wrap; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .eyebrow, .headline span, .heroBottom { animation: none; }
   .cta, .card { transition: none; }
 }
 
@@ -196,3 +192,6 @@
   .cta:active, .faqLink:active, .demoLink:active,
   .cta:hover > span, .demoLink:hover > span { transform: none; }
 }
+
+.headline { --reveal-delay: 120ms; }
+.heroBottom { --reveal-delay: 240ms; }

@@ -56,3 +56,23 @@ test('services section presents four accessible service cards', async ({ page })
   await expect(section.getByRole('article')).toHaveCount(4);
   await expect(section.getByRole('link', { name: 'Discuss Web development' })).toHaveAttribute('href', '#contact');
 });
+
+test('shared reveal resets when a section leaves the viewport', async ({ page }) => {
+  await page.goto('/');
+  const heading = page.locator('#services-title');
+  const group = heading.locator('..');
+  await expect(group).toHaveAttribute('data-reveal-state', 'hidden');
+  await group.scrollIntoViewIfNeeded();
+  await expect(group).toHaveAttribute('data-reveal-state', 'visible');
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+  await expect(group).toHaveAttribute('data-reveal-state', 'hidden');
+  await group.scrollIntoViewIfNeeded();
+  await expect(group).toHaveAttribute('data-reveal-state', 'visible');
+});
+
+test('reduced motion leaves content visible', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/');
+  await expect(page.locator('#services-title').locator('..')).not.toHaveAttribute('data-reveal-state', 'hidden');
+  await expect(page.locator('html')).not.toHaveClass(/lenis/);
+});

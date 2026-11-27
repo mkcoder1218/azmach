@@ -2,6 +2,10 @@ import type { Metadata } from 'next';
 import { Inter, Space_Grotesk } from 'next/font/google';
 import type { ReactNode } from 'react';
 import './global.css';
+import 'lenis/dist/lenis.css';
+import './motion.css';
+import SmoothScroll from '../components/motion/smooth-scroll';
+import RevealEffects from '../components/motion/reveal-effects';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
 const space = Space_Grotesk({ subsets: ['latin'], variable: '--font-space', display: 'swap' });
@@ -18,7 +22,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="en" className={inter.variable + ' ' + space.variable}>
-      <body>{children}</body>
+      <body>{children}<SmoothScroll /><RevealEffects /></body>
     </html>
   );
 }

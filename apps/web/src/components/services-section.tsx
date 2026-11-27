@@ -45,7 +45,7 @@ export default function ServicesSection() {
     if (!root || !('IntersectionObserver' in window)) return;
     const media = gsap.matchMedia();
     media.add('(prefers-reduced-motion: no-preference)', () => {
-      const nodes = Array.from(root.querySelectorAll<HTMLElement>('[data-service-reveal]'));
+      const nodes = Array.from(root.querySelectorAll<HTMLElement>('[data-card]'));
       const drawings = Array.from(root.querySelectorAll<SVGGeometryElement>('svg path, svg rect, svg circle'));
       const timelines = new Set<gsap.core.Timeline>();
       const observer = new IntersectionObserver(entries => {
@@ -70,11 +70,6 @@ export default function ServicesSection() {
               }
             });
           }
-          gsap.fromTo(entry.target, { opacity: 0, y: 16, filter: 'blur(7px)' }, {
-            opacity: 1, y: 0, filter: 'blur(0px)', duration: .85, ease: 'power3.out',
-            delay: entry.target.hasAttribute('data-card') ? Number(entry.target.getAttribute('data-card')) * .075 : 0,
-            clearProps: 'opacity,transform,filter', overwrite: 'auto',
-          });
         }
       }, { threshold: .12 });
       nodes.forEach(node => observer.observe(node));
@@ -82,8 +77,6 @@ export default function ServicesSection() {
         observer.disconnect();
         timelines.forEach(timeline => timeline.kill());
         gsap.set(drawings, { clearProps: 'strokeDasharray,strokeDashoffset,fillOpacity' });
-        gsap.killTweensOf(nodes);
-        gsap.set(nodes, { clearProps: 'opacity,transform,filter' });
       };
     });
     return () => media.revert();
@@ -92,13 +85,13 @@ export default function ServicesSection() {
   return (
     <section id="services" ref={section} className={styles.section} aria-labelledby="services-title">
       <div className={styles.meta}><span><i /> 02 / What we do</span><span>DESIGN — DEVELOP — DELIVER</span></div>
-      <div className={styles.intro} data-service-reveal="">
+      <div className={styles.intro} data-reveal="">
         <h2 id="services-title">Ideas into<br /><em>real impact.</em></h2>
         <p>From the first concept to the final line of code, we build digital products with clarity, craft and purpose.</p>
       </div>
       <div className={styles.cards}>
         {services.map((service, i) => (
-          <article key={service.icon} className={styles.card} data-service-reveal="" data-card={i}>
+          <article key={service.icon} className={styles.card} data-reveal="" data-card={i}>
             <div className={styles.cardTop}><span>0{i + 1} / SERVICE</span><a href="#contact" aria-label={`Discuss ${service.title}`} className={styles.arrow}>↗</a></div>
             <div className={styles.visual}><ServiceArtwork kind={service.icon} /></div>
             <div className={styles.copy}><h3>{service.title}</h3><p>{service.description}</p></div>

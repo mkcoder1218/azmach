@@ -1,0 +1,26 @@
+/* Shared reveal language; content remains visible without JavaScript. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal-state='hidden']:not(:focus-within) {
+    opacity: 0;
+    filter: blur(9px);
+    translate: 0 16px;
+  }
+  [data-reveal-state='visible'] {
+    animation: azmach-reveal .85s cubic-bezier(.2,.7,.2,1) both;
+    animation-delay: var(--reveal-delay, 0ms);
+  }
+  [data-reveal-state]:focus-within {
+    opacity: 1;
+    filter: none;
+    translate: none;
+    animation: none;
+  }
+  [data-reveal-state][data-card='1'] { --reveal-delay: 75ms; }
+  [data-reveal-state][data-card='2'] { --reveal-delay: 150ms; }
+  [data-reveal-state][data-card='3'] { --reveal-delay: 225ms; }
+}
+@keyframes azmach-reveal {
+  from { opacity: 0; filter: blur(9px); translate: 0 16px; }
+  to { opacity: 1; filter: blur(0); translate: 0 0; }
+}
+html.lenis { scroll-behavior: auto !important; }

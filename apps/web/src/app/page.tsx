@@ -38,12 +38,12 @@ export default function HomePage() {
             <span>01 — Introduction</span>
           </div>
           <div className={styles.heroBody}>
-            <div className={styles.eyebrow}>Independent software engineering</div>
-            <h1 id="hero-title" className={styles.headline}>
+            <div className={styles.eyebrow} data-reveal="">Independent software engineering</div>
+            <h1 id="hero-title" className={styles.headline} data-reveal="">
               <span>Build Today.</span>
               <span>Lead Tomorrow.</span>
             </h1>
-            <div className={styles.heroBottom}>
+            <div className={styles.heroBottom} data-reveal="">
               <p>Engineering digital experiences with intention, precision and a perspective rooted in Ethiopia.</p>
               <a className={styles.cta} href="#about">Explore the vision <span aria-hidden="true">↘</span></a>
             </div>
