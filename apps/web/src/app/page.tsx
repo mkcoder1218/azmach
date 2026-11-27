@@ -57,18 +57,18 @@ const projects = [
 ];
 
 const industries = [
-  'E-commerce',
-  'Hotels',
-  'Gyms',
-  'Schools',
-  'Non-profit organisations',
-  'Legal firms',
-  'Hospitals',
-  'Consultancy',
-  'Businesses',
-  'Ed-tech platforms',
-  'Fitness & wellness',
-  'Trading & import/export',
+  { name: 'E-commerce', icon: 'M4 7h16l1 14H3L4 7ZM8 9V6a4 4 0 0 1 8 0v3' },
+  { name: 'Hotels', icon: 'M3 18V6m18 15v-8a3 3 0 0 0-3-3h-7v8M3 18h18M3 21v-6h8m-5 0v-2a2 2 0 1 1 4 0v2' },
+  { name: 'Gyms', icon: 'M7 5h3v14H7zM14 5h3v14h-3zM3 8h4v8H3zM17 8h4v8h-4zM10 12h4' },
+  { name: 'Schools', icon: 'm3 10 9-7 9 7M5 9v12h14V9M10 21v-5h4v5m-2-12v3' },
+  { name: 'Non-profit organisations', icon: 'M12 20 4 12a4.5 4.5 0 0 1 6.4-6.4L12 7l1.6-1.4A4.5 4.5 0 0 1 20 12l-8 8Z' },
+  { name: 'Legal firms', icon: 'M12 3v17m-5 1h10M4 7h16M7 7l-4 8h8L7 7Zm10 0-4 8h8l-4-8Z' },
+  { name: 'Hospitals', icon: 'M9 3h6v6h6v6h-6v6H9v-6H3V9h6z' },
+  { name: 'Consultancy', icon: 'M4 4h16a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1h-9l-5 4v-4H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Zm3 5h10M7 13h6' },
+  { name: 'Businesses', icon: 'M3 7h18v13H3zM8 7V4h8v3M3 12h18m-11 0v2h4v-2' },
+  { name: 'Ed-tech platforms', icon: 'M3 4h18v13H3zM8 21h8m-4-4v4M7 10l5-3 5 3-5 3-5-3Z' },
+  { name: 'Fitness & wellness', icon: 'M3 12h4l3-6 4 12 3-6h4' },
+  { name: 'Trading & import/export', icon: 'm12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Zm-8 4.5 8 4.5 8-4.5M12 12v9M8 5.3l8 4.5' },
 ];
 
 const testimonials = [
@@ -203,8 +203,13 @@ export default function HomePage() {
         <section id="industries" className={styles.editorialSection} aria-labelledby="industries-title">
           <h2 id="industries-title" className={styles.editorialTitle}>Industries we serve.</h2>
           <ul className={styles.industryGrid}>
-            {industries.map((industry, index) => (
-              <li key={industry} data-reveal="" data-card={index % 4}>{industry}</li>
+            {industries.map(({ name, icon }, index) => (
+              <li key={name} data-reveal="" data-card={index % 4}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d={icon} />
+                </svg>
+                <span>{name}</span>
+              </li>
             ))}
           </ul>
         </section>

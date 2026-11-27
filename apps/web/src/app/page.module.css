@@ -406,11 +406,10 @@
   overflow-wrap: anywhere;
 }
 
-.industryGrid li::before {
-  content: '';
-  width: 1.5rem;
-  height: 2px;
-  background: var(--accent);
+.industryGrid svg {
+  width: clamp(1.5rem, 2vw, 2rem);
+  height: auto;
+  color: var(--accent);
 }
 
 @media (max-width: 1000px) {
