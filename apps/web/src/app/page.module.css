@@ -69,3 +69,19 @@
   .eyebrow, .headline span, .heroBottom { animation: none; }
   .cta, .card { transition: none; }
 }
+
+/* Keep the hero content independent of the WebGL renderer. */
+.artwork { position: absolute; inset: 0 0 0 40%; z-index: -1; pointer-events: none; overflow: hidden; }
+.artwork::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, var(--background), transparent 30%); }
+.heroBody { position: relative; }
+.headline { font-size: clamp(2.7rem, 7vw, 7.5rem); }
+.heroBottom { align-items: start; flex-direction: column; width: min(45%, 38rem); gap: 1.5rem; }
+.heroBottom p { max-width: 29rem; }
+@media (max-width: 900px) {
+  .artwork { inset: 0 0 0 30%; opacity: .36; }
+  .heroBottom { width: 100%; }
+}
+@media (max-width: 700px) {
+  .artwork { inset: 0 0 0 22%; opacity: .24; }
+  .headline { font-size: clamp(2.25rem, 9.6vw, 4.5rem); }
+}

@@ -1,3 +1,4 @@
+import ArchitecturalA from '../components/architectural-a';
 import styles from './page.module.css';
 
 const principles = [
@@ -22,6 +23,7 @@ export default function HomePage() {
       <main id="main">
         <section className={styles.hero} aria-labelledby="hero-title">
           <div className={styles.grid} aria-hidden="true" />
+          <div className={styles.artwork}><ArchitecturalA /></div>
           <div className={styles.heroMeta}>
             <span><i aria-hidden="true" /> Ethiopian roots. Global ambition.</span>
             <span>01 — Introduction</span>
