@@ -19,12 +19,12 @@ const principles = [
 const projects = [
   {
     "number": "01",
-    "title": "Kiron",
-    "category": "Systems engineering",
-    "description": "Legacy system analysis, desktop application development and software interoperability.",
-    "href": "https://playbelman.com/",
+    "title": "Eastern Travel and Tour",
+    "category": "Tour and travel platform",
+    "description": "A travel platform for exploring tours and planning trips with Eastern Travel and Tour.",
+    "href": "https://easterntravelandtour.com/",
     "linkLabel": "Visit website",
-    "previewUrl": "https://playbelman.com/"
+    "previewUrl": "https://easterntravelandtour.com/"
   },
   {
     "number": "02",
