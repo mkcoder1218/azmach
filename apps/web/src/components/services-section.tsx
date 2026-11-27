@@ -8,7 +8,7 @@ import styles from './services-section.module.css';
 const services = [
   { title: 'Web development', description: 'Fast, expressive websites and web platforms built around your business.', tags: ['Corporate websites', 'Web platforms'], icon: 'web' },
   { title: 'Mobile applications', description: 'Intuitive mobile experiences that make complex tasks feel effortless.', tags: ['iOS & Android', 'Mobile UX'], icon: 'mobile' },
-  { title: 'Software engineering', description: 'Reliable software, connected systems and architecture designed to grow.', tags: ['APIs & integrations', 'Business systems'], icon: 'system' },
+  { title: 'Business software solutions', description: 'Custom software that streamlines daily operations, connects your tools and grows with your business.', tags: ['APIs & integrations', 'Business systems'], icon: 'system' },
   { title: 'Digital experiences', description: 'Thoughtful interfaces where visual identity meets purposeful interaction.', tags: ['UI / UX', 'Interaction design'], icon: 'design' },
 ] as const;
 
