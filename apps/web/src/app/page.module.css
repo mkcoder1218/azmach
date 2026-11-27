@@ -1,10 +1,10 @@
 .shell { max-width: 1920px; margin-inline: auto; }
-.skip { position: absolute; left: 1rem; top: -5rem; z-index: 10; padding: 1rem; background: var(--surface); }
+.skip { position: absolute; left: 1rem; top: -5rem; z-index: 60; padding: 1rem; background: var(--surface); }
 .skip:focus { top: 1rem; }
 .header {
   display: flex; align-items: center; justify-content: space-between; gap: clamp(1rem, 2vw, 2.5rem);
-  min-height: 78px; padding: 0 var(--gutter); background: var(--surface); border-bottom: 1px solid var(--line);
-  position: relative; z-index: 5;
+  min-height: var(--header-height); padding: 0 var(--gutter); background: var(--surface); border-bottom: 1px solid var(--line);
+  position: sticky; top: 0; z-index: 50;
 }
 .brand { display: inline-flex; align-items: center; flex-shrink: 0; }
 .footer a:hover { color: var(--accent); }
@@ -44,7 +44,6 @@
 .card p { margin-top: .6rem; color: var(--muted); font-size: .85rem; line-height: 1.6; }
 .footer { display: flex; justify-content: space-between; gap: 1rem; border-top: 1px solid var(--line); padding: 1.5rem var(--gutter); color: var(--muted); font-size: .75rem; }
 @media (max-width: 700px) {
-  .header { min-height: 66px; }
   .index, .heroMeta > span:last-child { display: none; }
   .hero { min-height: calc(100svh - 66px); }
   .headline { font-size: clamp(2.25rem, 9.6vw, 4.5rem); }

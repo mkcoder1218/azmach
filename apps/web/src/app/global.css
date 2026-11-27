@@ -7,12 +7,13 @@
   --accent: #b91c1c;
   --muted: #595955;
   --line: #d4d0ca;
+  --header-height: 78px;
   --gutter: clamp(1.25rem, 5vw, 5.5rem);
   --font-heading: Arial, sans-serif;
   --font-body: Helvetica, Arial, sans-serif;
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: var(--header-height); }
 body {
   min-height: 100vh;
   margin: 0;
@@ -74,4 +75,8 @@ button .az-faq-title, button span[style*='font-family'] { font-family: var(--fon
     animation-timing-function: cubic-bezier(.22,1,.36,1);
   }
   html[data-theme-changing] body { transition: background-color .42s ease, color .42s ease; }
+}
+
+@media (max-width: 700px) {
+  :root { --header-height: 66px; }
 }
