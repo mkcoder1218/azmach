@@ -19,22 +19,22 @@ const projects = [
     "title": "Kiron",
     "category": "Systems engineering",
     "description": "Legacy system analysis, desktop application development and software interoperability.",
-    "href": "https://github.com/mkcoder1218/kiron2_mac",
-    "linkLabel": "Restricted repository",
+    "href": "https://playbelman.com/",
+    "linkLabel": "Visit website",
     "mark": "KI",
     "tone": "#18272c",
-    "previewUrl": null
+    "previewUrl": "https://playbelman.com/"
   },
   {
     "number": "02",
     "title": "Alpha Virtual",
     "category": "Platform engineering",
     "description": "Modular real-time platform with administration, cashier interfaces and service orchestration.",
-    "href": "https://github.com/Hyaw-tech/ALPHA_VIRTUAL",
-    "linkLabel": "Restricted repository",
+    "href": "https://retail3.pleymanbet.com/",
+    "linkLabel": "Visit website",
     "mark": "A",
     "tone": "#22242e",
-    "previewUrl": null
+    "previewUrl": "https://retail3.pleymanbet.com/"
   },
   {
     "number": "03",
