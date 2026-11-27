@@ -58,6 +58,11 @@ export default function HomePage() {
   const workStage = useRef<HTMLDivElement>(null);
   const [selectedProject, setSelectedProject] = useState(projects[2]);
   const [stageVisible, setStageVisible] = useState(false);
+  const [frameReady, setFrameReady] = useState(false);
+
+  useEffect(() => {
+    if (!stageVisible || preview) setFrameReady(false);
+  }, [stageVisible, preview]);
 
   useEffect(() => {
     const stage = workStage.current;
@@ -87,6 +92,7 @@ export default function HomePage() {
 
   return (
     <div className={styles.shell} id="top">
+      <style>{"\n@media (prefers-reduced-motion: no-preference) {\n  .work-choice { transition: color .35s ease, transform .45s cubic-bezier(.22,1,.36,1); }\n  .work-choice:hover { transform: translateX(4px); }\n  .work-choice:active { transform: translateX(4px) scale(.985); }\n  .work-arrow { transition: background .35s ease, color .35s ease, border-color .35s ease, transform .5s cubic-bezier(.22,1,.36,1); }\n  .work-choice[aria-pressed=\"true\"] .work-arrow { transform: rotate(-45deg); }\n  .work-details { transition: grid-template-rows .5s cubic-bezier(.22,1,.36,1), opacity .38s ease, filter .5s ease, transform .5s cubic-bezier(.22,1,.36,1), visibility .5s; }\n  .work-frame { animation: work-sharp .75s cubic-bezier(.22,1,.36,1) both; }\n  .work-address { animation: work-sharp .45s cubic-bezier(.22,1,.36,1) both; }\n  @keyframes work-sharp { from { opacity: 0; filter: blur(12px); transform: translateY(9px) scale(.985); } to { opacity: 1; filter: blur(0); transform: none; } }\n  .work-loading { animation: work-pulse 1.4s ease-in-out infinite alternate; }\n  @keyframes work-pulse { from { opacity: .45; } to { opacity: 1; } }\n}\n"}</style>
       <a className={styles.skip} href="#main">Skip to content</a>
       <header className={styles.header}>
         <a className={styles.brand} href="#top" aria-label="AZMACH.E home"><AnimatedLogo /></a>
@@ -134,20 +140,22 @@ export default function HomePage() {
                 const active = selectedProject.number === project.number;
                 return (
                   <article key={project.number} data-card={index} style={{ borderBottom: '1px solid var(--line)', padding: '1.25rem 0' }}>
-                    <button type="button" aria-pressed={active} aria-controls="work-preview" onClick={() => setSelectedProject(project)} style={{ display: 'grid', gridTemplateColumns: '2rem minmax(0, 1fr) 2.75rem', alignItems: 'center', gap: '.75rem', width: '100%', minHeight: '64px', textAlign: 'left', cursor: 'pointer', border: 0, padding: 0, background: 'transparent', color: active ? 'var(--accent)' : 'var(--foreground)', fontFamily: 'inherit' }}>
+                    <button type="button" aria-pressed={active} aria-controls={"work-details-" + project.number} aria-expanded={active} className="work-choice" onClick={() => { if (!active) { setFrameReady(false); setSelectedProject(project); } }} style={{ display: 'grid', gridTemplateColumns: '2rem minmax(0, 1fr) 2.75rem', alignItems: 'center', gap: '.75rem', width: '100%', minHeight: '64px', textAlign: 'left', cursor: 'pointer', border: 0, padding: 0, background: 'transparent', color: active ? 'var(--accent)' : 'var(--foreground)', fontFamily: 'inherit' }}>
                       <span style={{ fontSize: '.7rem', letterSpacing: '.08em', alignSelf: 'start', paddingTop: '.5rem' }}>{project.number}</span>
                       <span style={{ display: 'grid', gap: '.35rem' }}>
                         <span style={{ fontFamily: 'var(--font-space), sans-serif', fontSize: 'clamp(1.65rem, 3vw, 2.8rem)', fontWeight: 600, letterSpacing: '-.055em', lineHeight: 1.1 }}>{project.title}</span>
                         <span style={{ fontSize: '.76rem', color: 'var(--muted)' }}>{project.category}</span>
                       </span>
-                      <span aria-hidden="true" style={{ display: 'grid', placeItems: 'center', border: '1px solid ' + (active ? 'var(--accent)' : 'var(--line)'), borderRadius: '50%', width: '2.65rem', height: '2.65rem', fontSize: '1.2rem', background: active ? 'var(--accent)' : 'transparent', color: active ? '#fff' : 'inherit' }}>{active ? '↗' : '→'}</span>
+                      <span aria-hidden="true" className="work-arrow" style={{ display: 'grid', placeItems: 'center', border: '1px solid ' + (active ? 'var(--accent)' : 'var(--line)'), borderRadius: '50%', width: '2.65rem', height: '2.65rem', fontSize: '1.2rem', background: active ? 'var(--accent)' : 'transparent', color: active ? '#fff' : 'inherit' }}>→</span>
                     </button>
-                    {active && (
-                      <div style={{ padding: '.8rem 0 0 2.75rem', display: 'grid', gap: '.9rem' }}>
+                    <div id={"work-details-" + project.number} className="work-details" aria-hidden={!active} style={{ display: 'grid', gridTemplateRows: active ? '1fr' : '0fr', opacity: active ? 1 : 0, filter: active ? 'blur(0)' : 'blur(7px)', transform: active ? 'translateY(0)' : 'translateY(-6px)', visibility: active ? 'visible' : 'hidden' }}>
+                      <div style={{ minHeight: 0, overflow: 'hidden' }}>
+                        <div style={{ padding: '.8rem 0 0 2.75rem', display: 'grid', gap: '.9rem' }}>
                         <div style={{ color: 'var(--muted)', fontSize: '.9rem', lineHeight: 1.65 }}>{project.description}</div>
-                        <a href={project.href} target="_blank" rel="noopener noreferrer" style={{ width: 'fit-content', fontSize: '.8rem', fontWeight: 600, textDecoration: 'underline', textUnderlineOffset: '4px' }}>Visit website ↗</a>
+                        <a tabIndex={active ? 0 : -1} href={project.href} target="_blank" rel="noopener noreferrer" style={{ width: 'fit-content', fontSize: '.8rem', fontWeight: 600, textDecoration: 'underline', textUnderlineOffset: '4px' }}>Visit website ↗</a>
+                        </div>
                       </div>
-                    )}
+                    </div>
                   </article>
                 );
               })}
@@ -156,12 +164,17 @@ export default function HomePage() {
               <div style={{ border: '1px solid var(--line)', background: '#fff', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 18px 45px #17171712' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '.6rem', padding: '.8rem 1rem', background: '#eae7e2', borderBottom: '1px solid var(--line)' }}>
                   <span aria-hidden="true" style={{ color: '#8c8984', letterSpacing: '.15em', fontSize: '.85rem' }}>●●●</span>
-                  <span style={{ flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', textAlign: 'center', fontSize: '.72rem', color: '#57534e', background: '#faf9f7', borderRadius: '5px', padding: '.4rem .6rem' }}>{new URL(selectedProject.previewUrl).hostname}</span>
+                  <span key={selectedProject.number} className="work-address" style={{ flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', textAlign: 'center', fontSize: '.72rem', color: '#57534e', background: '#faf9f7', borderRadius: '5px', padding: '.4rem .6rem' }}>{new URL(selectedProject.previewUrl).hostname}</span>
                   <button type="button" onClick={() => setPreview(selectedProject)} aria-label={'Expand ' + selectedProject.title + ' preview'} style={{ border: 0, background: 'transparent', color: '#171717', cursor: 'pointer', fontSize: '1.1rem', minWidth: '2rem', minHeight: '2rem' }}>↗</button>
                 </div>
                 <div style={{ position: 'relative', aspectRatio: '16 / 11', background: '#f4f2ee', overflow: 'hidden' }}>
                   {stageVisible && !preview && (
-                    <iframe key={selectedProject.number} title={selectedProject.title + ' inline website preview'} src={selectedProject.previewUrl} sandbox="allow-scripts allow-same-origin" referrerPolicy="no-referrer" loading="lazy" style={{ display: 'block', width: '100%', height: '100%', position: 'absolute', inset: 0, border: 0, background: '#fff' }} />
+                    <>
+                      {!frameReady && <div role="status" className="work-loading" style={{ position: 'absolute', inset: 0, display: 'grid', placeItems: 'center', color: 'var(--muted)', fontSize: '.8rem', letterSpacing: '.12em', textTransform: 'uppercase' }}>Loading {selectedProject.title}</div>}
+                      <div key={selectedProject.number} className={frameReady ? 'work-frame' : undefined} style={{ position: 'absolute', inset: 0, visibility: frameReady ? 'visible' : 'hidden' }}>
+                        <iframe title={selectedProject.title + ' inline website preview'} src={selectedProject.previewUrl} sandbox="allow-scripts allow-same-origin" referrerPolicy="no-referrer" loading="lazy" onLoad={() => setFrameReady(true)} style={{ display: 'block', width: '100%', height: '100%', border: 0, background: '#fff' }} />
+                      </div>
+                    </>
                   )}
                 </div>
               </div>
