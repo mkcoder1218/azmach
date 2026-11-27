@@ -1,3 +1,6 @@
+'use client';
+
+import { useEffect, useRef, useState } from 'react';
 import ServicesSection from '../components/services-section';
 import DesktopNavigation from '../components/desktop-navigation';
 import AnimatedLogo from '../components/animated-logo';
@@ -19,7 +22,8 @@ const projects = [
     "href": "https://github.com/mkcoder1218/kiron2_mac",
     "linkLabel": "Restricted repository",
     "mark": "KI",
-    "tone": "#18272c"
+    "tone": "#18272c",
+    "previewUrl": null
   },
   {
     "number": "02",
@@ -29,17 +33,19 @@ const projects = [
     "href": "https://github.com/Hyaw-tech/ALPHA_VIRTUAL",
     "linkLabel": "Restricted repository",
     "mark": "A",
-    "tone": "#22242e"
+    "tone": "#22242e",
+    "previewUrl": null
   },
   {
     "number": "03",
     "title": "STW Media",
     "category": "Creative digital experience",
     "description": "Cinematic media portfolio with interactive video showcases and motion-driven navigation.",
-    "href": "https://github.com/mkcoder1218/STW-Media",
-    "linkLabel": "View repository",
+    "href": "https://stw-media.vercel.app/",
+    "linkLabel": "Visit website",
     "mark": "STW",
-    "tone": "#382522"
+    "tone": "#382522",
+    "previewUrl": "https://stw-media.vercel.app/"
   },
   {
     "number": "04",
@@ -49,51 +55,27 @@ const projects = [
     "href": "https://hyaw.tech",
     "linkLabel": "Visit website",
     "mark": "H",
-    "tone": "#20332d"
-  },
-  {
-    "number": "05",
-    "title": "RedSea",
-    "category": "Digital marketplace",
-    "description": "A modern online shopping experience built with Next.js, React and TypeScript.",
-    "href": null,
-    "linkLabel": "",
-    "mark": "RS",
-    "tone": "#293c49"
-  },
-  {
-    "number": "06",
-    "title": "Glam Nest",
-    "category": "Beauty & lifestyle",
-    "description": "A digital experience for a beauty and hair salon, built with React and TypeScript.",
-    "href": null,
-    "linkLabel": "",
-    "mark": "GN",
-    "tone": "#543a48"
-  },
-  {
-    "number": "07",
-    "title": "Little Paris",
-    "category": "Hospitality & dining",
-    "description": "A restaurant website and digital menu experience, built with Next.js and React.",
-    "href": null,
-    "linkLabel": "",
-    "mark": "LP",
-    "tone": "#493d2e"
-  },
-  {
-    "number": "08",
-    "title": "Shine Health Care",
-    "category": "Healthcare",
-    "description": "A healthcare web experience built with React, TypeScript and client-side navigation.",
-    "href": null,
-    "linkLabel": "",
-    "mark": "SH",
-    "tone": "#29423f"
+    "tone": "#20332d",
+    "previewUrl": "https://hyaw.tech/"
   }
 ];
 
 export default function HomePage() {
+  const [preview, setPreview] = useState<(typeof projects)[number] | null>(null);
+  const previewDialog = useRef<HTMLDialogElement>(null);
+
+  useEffect(() => {
+    const dialog = previewDialog.current;
+    if (!preview || !dialog) return;
+    dialog.showModal();
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      dialog.close();
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [preview]);
+
   return (
     <div className={styles.shell} id="top">
       <a className={styles.skip} href="#main">Skip to content</a>
@@ -138,7 +120,7 @@ export default function HomePage() {
           <p className={styles.sectionIndex}>Our Works</p>
           <div><h2 id="work-title">Selected work.</h2><p>A selection of systems, platforms and digital experiences across technology, media, commerce and everyday life.</p></div>
           <div style={{ gridColumn: '1 / -1' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '1.25rem', marginTop: '2rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))', gap: '1.25rem', marginTop: '2rem' }}>
               {projects.map((project, index) => (
                 <article key={project.number} data-card={index % 4} style={{ border: '1px solid var(--line)', overflow: 'hidden', display: 'flex', flexDirection: 'column', minWidth: 0 }}>
                   <div aria-hidden="true" style={{ position: 'relative', overflow: 'hidden', aspectRatio: '16 / 10', background: project.tone, color: '#fff' }}>
@@ -159,8 +141,13 @@ export default function HomePage() {
                     <span style={{ color: 'var(--accent)', fontSize: '.75rem', fontWeight: 600 }}>{project.number} / {project.category}</span>
                     <h3 style={{ fontFamily: 'var(--font-space), sans-serif', fontSize: '1.65rem', letterSpacing: '-.04em' }}>{project.title}</h3>
                     <div style={{ color: 'var(--muted)', fontSize: '.95rem', lineHeight: 1.65, flex: 1 }}>{project.description}</div>
+                    {project.previewUrl && (
+                      <button type="button" className={styles.cta} style={{ marginTop: '.6rem', minWidth: 0, width: '100%', cursor: 'pointer', fontFamily: 'inherit' }} onClick={() => setPreview(project)}>
+                        Live preview <span aria-hidden="true">↗</span>
+                      </button>
+                    )}
                     {project.href && (
-                      <a className={styles.cta} style={{ marginTop: '.6rem', minWidth: 0, alignSelf: 'stretch' }} href={project.href} target="_blank" rel="noopener noreferrer" aria-label={project.linkLabel + ': ' + project.title + ' (opens in a new tab)'}>
+                      <a className={styles.cta} style={{ marginTop: '.25rem', minWidth: 0, alignSelf: 'stretch', ...(project.previewUrl ? { background: 'var(--foreground)' } : {}) }} href={project.href} target="_blank" rel="noopener noreferrer" aria-label={project.linkLabel + ': ' + project.title + ' (opens in a new tab)'}>
                         {project.linkLabel} <span aria-hidden="true">↗</span>
                       </a>
                     )}
@@ -195,6 +182,19 @@ export default function HomePage() {
           <div><h2 id="contact-title">Let’s build something.</h2><p>Contact and demo booking details will be available here soon.</p></div>
         </section>
       </main>
+      <dialog ref={previewDialog} aria-label={preview ? preview.title + ' live preview' : 'Live website preview'} onCancel={(event) => { event.preventDefault(); setPreview(null); }} onClick={(event) => { if (event.target === event.currentTarget) setPreview(null); }} style={{ position: 'fixed', inset: 0, margin: 'auto', width: 'min(96vw, 1440px)', maxWidth: '96vw', maxHeight: '92dvh', padding: 0, border: '1px solid var(--line)', background: '#faf9f7', color: 'var(--foreground)', boxShadow: '0 0 0 100vmax #0009, 0 24px 80px #0005' }}>
+        {preview?.previewUrl && (
+          <div data-no-reveal="">
+            <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '.75rem', padding: '1rem', borderBottom: '1px solid var(--line)' }}>
+              <strong style={{ flex: '1 1 140px' }}>{preview.title} — Live preview</strong>
+              <a href={preview.previewUrl} target="_blank" rel="noopener noreferrer" style={{ fontSize: '.85rem', textDecoration: 'underline' }}>Open website ↗</a>
+              <button type="button" autoFocus onClick={() => setPreview(null)} style={{ cursor: 'pointer', border: '1px solid var(--line)', background: 'transparent', color: 'inherit', padding: '.55rem .9rem' }}>Close ×</button>
+            </div>
+            <div style={{ padding: '.65rem 1rem', fontSize: '.8rem', color: 'var(--muted)' }}>If the website blocks embedded previews, use Open website above.</div>
+            <iframe title={preview.title + ' website'} src={preview.previewUrl} sandbox="allow-scripts allow-same-origin" referrerPolicy="no-referrer" style={{ display: 'block', width: '100%', height: 'min(72dvh, 900px)', border: 0, background: '#fff' }} />
+          </div>
+        )}
+      </dialog>
       <footer className={styles.footer}><span>AZMACH.E — Ethiopian roots. Global ambition.</span><a href="#top">Back to top ↑</a></footer>
     </div>
   );
