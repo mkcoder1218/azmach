@@ -1,0 +1,28 @@
+.banner {
+  position: relative;
+  grid-column: 1 / -1;
+  height: clamp(12rem, 32vw, 27rem);
+  margin-bottom: 1.25rem;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.banner img {
+  object-fit: cover;
+  object-position: 85% center;
+}
+
+.dark,
+:global(html[data-theme="dark"]) .light {
+  opacity: 0;
+}
+
+:global(html[data-theme="dark"]) .dark {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :global(html[data-theme-changing]) .banner img {
+    transition: opacity .42s ease;
+  }
+}

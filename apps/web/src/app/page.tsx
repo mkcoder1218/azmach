@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import SectionBanner from '../components/section-banner';
 import ServicesSection from '../components/services-section';
 import DesktopNavigation from '../components/desktop-navigation';
 import MobileNavigation from '../components/mobile-navigation';
@@ -208,6 +209,7 @@ export default function HomePage() {
         <section id="work" className={styles.about} aria-labelledby="work-title">
           <p className={styles.sectionIndex}>Our Works</p>
           <div><h2 id="work-title">Selected work.</h2><p>A selection of systems, platforms and digital experiences across technology, media, commerce and everyday life.</p></div>
+          <SectionBanner section="work" />
           <div style={{ gridColumn: '1 / -1', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 340px), 1fr))', gap: 'clamp(1.5rem, 4vw, 4rem)', alignItems: 'start', marginTop: '1rem' }}>
             <div style={{ display: 'grid', borderTop: '1px solid var(--line)' }}>
               {projects.map((project, index) => {
@@ -266,6 +268,7 @@ export default function HomePage() {
             <h2 id="about-title">Built with purpose.</h2>
             <p style={{ maxWidth: '48rem', fontSize: 'clamp(1.2rem, 2vw, 1.65rem)', lineHeight: 1.55, color: 'var(--foreground)' }}>Ethiopian roots. Global ambition. We believe technology should do more than work — it should create meaningful progress.</p>
           </div>
+          <SectionBanner section="about" />
           <div className="about-story">
             <div className="about-visual az-brand-visual" data-reveal="">
               <div className="az-brand-mark" aria-hidden="true">
@@ -303,6 +306,7 @@ export default function HomePage() {
               <p>Four principles. One direction. The way we think, create and deliver.</p>
             </div>
           </div>
+          <SectionBanner section="principles" />
           <div>
             {principles.map((item, index) => (
               <article key={item.number} className="principle-line" data-card={index}>
@@ -324,6 +328,7 @@ export default function HomePage() {
         <section id="faqs" className={styles.about} aria-labelledby="faq-title">
           <p className={styles.sectionIndex}>FAQs</p>
           <div><h2 id="faq-title">Common questions.</h2><p>Everything you need to know before starting a conversation with us.</p></div>
+          <SectionBanner section="faqs" />
           <div className="az-faq-list">
             {faqItems.map(([question, answer], index) => {
               const active = openFaq === index;
@@ -346,6 +351,7 @@ export default function HomePage() {
           <style>{"\n.az-contact-label { display:flex; align-items:center; gap:.8rem; }\n.az-contact-icon { display:grid; place-items:center; width:44px; height:44px; border:1px solid var(--line); border-radius:8px; background:var(--surface); color:var(--accent); }\n.az-contact-icon svg { width:21px; height:21px; }\n.az-contact-value { display:block; }\n.az-contact-action { display:inline-flex; align-items:center; justify-self:start; gap:.75rem; font-size:.8rem; font-weight:600; color:var(--foreground); }\n.az-contact-arrow { display:grid; place-items:center; width:30px; height:30px; font-size:1rem; border:1px solid var(--line); border-radius:50%; color:var(--accent); }\n.az-contact-link:hover .az-contact-arrow,.az-contact-link:focus-visible .az-contact-arrow { background:var(--accent); border-color:var(--accent); color:var(--button-ink); }\n.az-contact-link:hover .az-contact-icon,.az-contact-link:focus-visible .az-contact-icon { border-color:var(--accent); }\n.az-contact-link:focus-visible .az-contact-value { color:var(--accent); }\n@media(prefers-reduced-motion:no-preference) {\n.az-contact-icon,.az-contact-arrow { transition:background-color .3s,color .3s,border-color .3s,transform .4s cubic-bezier(.22,1,.36,1); }\n.az-contact-link:hover .az-contact-icon { transform:translateY(-3px); }\n}\n"}</style>
           <p className={styles.sectionIndex}>Contact / Demo</p>
           <div><h2 id="contact-title">Let’s build something.</h2><p>Have a project in mind, a question, or an idea worth exploring? Get in touch to discuss your next step or request a demo.</p></div>
+          <SectionBanner section="contact" />
           <div className="az-contact-links">
             <article data-card={0}>
               <a className="az-contact-link" href="mailto:yetsadkanasefa@gmail.com">

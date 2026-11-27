@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import SectionBanner from './section-banner';
 import styles from './services-section.module.css';
 
 const services = [
@@ -110,6 +111,7 @@ export default function ServicesSection() {
         <h2 id="services-title">Ideas into<br /><em>real impact.</em></h2>
         <p>From the first concept to the final line of code, we build digital products with clarity, craft and purpose.</p>
       </div>
+      <SectionBanner section="services" />
       <div className={styles.cards}>
         {services.map((service, i) => (
           <article key={service.icon} className={styles.card} data-reveal="" data-card={i}>
