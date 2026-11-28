@@ -1,101 +1,55 @@
-# Azmach
+# AZMACH.E
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+**Build Today. Lead Tomorrow.**
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is ready ✨.
+Official website for AZMACH.E, an Ethiopian technology company offering web development, mobile applications, business software solutions and digital experiences.
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/next?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+## Getting started
 
-## Run tasks
-
-To run the dev server for your app, use:
+Requirements: Git, Node.js 24 (matching CI), pnpm 12.4.2.
 
 ```sh
-npx nx dev web
+git clone https://github.com/mkcoder1218/azmach.git
+cd azmach
+npm install --global pnpm@12.4.2
+pnpm install --frozen-lockfile
+pnpm nx dev web
 ```
 
-To create a production bundle:
+Open http://localhost:3000. Configure email delivery before testing the enquiry form (see below).
+
+## Documentation
+
+| Guide | Contents |
+| --- | --- |
+| [Architecture](docs/ARCHITECTURE.md) | Workspace, stack, routes and component ownership |
+| [Development](docs/DEVELOPMENT.md) | Commands, testing and contribution workflow |
+| [Design system](docs/DESIGN.md) | Identity, typography, themes, animation and accessibility |
+| [Contact API](docs/CONTACT_API.md) | Request contract, validation, Resend configuration and errors |
+| [Deployment and security](docs/DEPLOYMENT.md) | Hosting, CI, release checklist and operational risks |
+
+## Common commands
 
 ```sh
-npx nx build web
+pnpm nx show project web
+pnpm nx graph
+pnpm nx run-many -t lint
+pnpm nx run-many -t typecheck
+pnpm nx build web
+pnpm nx start web
 ```
 
-To see all available targets to run for a project, run:
+Run build before start. Use a separate terminal for the development server if needed.
 
-```sh
-npx nx show project web
-```
+## Project layout
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+- `apps/web`: Next.js website and server-side contact endpoint.
+- `apps/web-e2e`: Playwright browser tests.
+- `docs`: Maintained project documentation.
+- `.github/workflows/quality-security.yml`: Automated validation.
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+## Contact
 
-## Add new projects
+Website enquiries: info@azmache.com. Support: support@azmache.com.
 
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
-
-Use the plugin's generator to create new projects.
-
-To generate a new application, use:
-
-```sh
-npx nx g @nx/next:app demo
-```
-
-To generate a new library, use:
-
-```sh
-npx nx g @nx/react:lib mylib
-```
-
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
-
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Set up CI!
-
-### Step 1
-
-To connect to Nx Cloud, run the following command:
-
-```sh
-npx nx connect
-```
-
-Connecting to Nx Cloud ensures a [fast and scalable CI](https://nx.dev/ci/intro/why-nx-cloud?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) pipeline. It includes features such as:
-
-- [Remote caching](https://nx.dev/ci/features/remote-cache?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task distribution across multiple machines](https://nx.dev/ci/features/distribute-task-execution?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Automated e2e test splitting](https://nx.dev/ci/features/split-e2e-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task flakiness detection and rerunning](https://nx.dev/ci/features/flaky-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-### Step 2
-
-Use the following command to configure a CI workflow for your workspace:
-
-```sh
-npx nx g ci-workflow
-```
-
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Install Nx Console
-
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
-
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/nx-api/next?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+Keep documentation synchronized with changes to routes, dependencies, environment variables, visual conventions and deployment. The guides describe the checked-in implementation, not a guarantee of live hosting or email delivery.
